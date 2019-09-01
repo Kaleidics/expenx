@@ -1,0 +1,25 @@
+.navbar {
+    &__container {
+        width: 100%;
+        background: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 1.5rem;
+    }
+
+    &__logo {
+        display: flex;
+        align-items: center;
+    }
+
+    &__image {
+        width: 4rem;
+    }
+
+    &__name {
+        font-size: 2.2rem;
+        align-self: flex-end;
+        margin: 0 1rem;
+    }
+}

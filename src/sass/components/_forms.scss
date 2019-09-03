@@ -24,7 +24,6 @@
     border: 1px solid $grey-1;
     font-family: "Lato", sans-serif;
     font-size: 1.6rem;
-    font-weight: 700;
     background-color: $white-1;
     margin-bottom: 1.5rem;
     &:active,
@@ -44,7 +43,7 @@
 .select {
     color: #6f6f6f;
     font-weight: 400;
-    box-shadow: 0 2px 2px -1px rgba($black-1, .15);
+    box-shadow: 0 2px 2px -1px rgba($black-1, 0.15);
     background-color: transparent;
 }
 
@@ -132,7 +131,7 @@
     flex-direction: column;
     align-items: center;
     width: 95%;
-    min-height: 90.6rem;
+    // height: 90.6rem;
     margin: 0 auto;
     background-color: $white-1;
     position: relative;
@@ -141,6 +140,10 @@
 .form {
     width: 95%;
     max-width: 32rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    animation: moveInRight 0.3s ease-out backwards;
 }
 
 .fieldset {
@@ -157,4 +160,50 @@
     text-align: center;
     font-size: 2.8rem;
     font-weight: 300;
+}
+
+.form-alternate {
+    font-size: 1.6rem;
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.alternate-text {
+    text-decoration: underline;
+    color: $primary-1;
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-size: 1.6rem;
+}
+
+.form-message {
+    position: absolute;
+    left: 5%;
+    width: 90%;
+    height: 100vh;
+    z-index: 2;
+    background: $white-1;
+
+    &__container {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        margin: 5rem auto;
+        width: 100%;
+        max-width: 32rem;
+    }
+
+    * {
+        margin-bottom: 2rem;
+    }
+
+    &__heading {
+        color: $black-1;
+        font-size: 1.6rem;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        font-weight: 400;
+    }
 }

@@ -9,10 +9,10 @@ class NavBar extends Component {
         return (
             <nav className="navbar">
                 <div className="navbar__container">
-                    <div className="navbar__logo">
+                    <Link to="/" className="navbar__logo">
                         <img className="navbar__image" src={logofinal} alt="ExpenX logo" />
                         <p className="navbar__name">ExpenX</p>
-                    </div>
+                    </Link>
                     <Link to="/signin" className="btn">
                         Sign in
                     </Link>

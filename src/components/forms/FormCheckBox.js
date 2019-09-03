@@ -7,7 +7,7 @@ export default function FormCheckBox(props) {
                 <div>{props.label}</div>
                 <label className="checkbox-label" htmlFor={props.id}>
                     <input className="checkbox" id={props.id} type={props.type} onChange={e => props.onChange(e)} value={props.value} checked={props.value ? "checked" : ""} />
-                    <span className="custom-checkbox"></span>I have read and I do accept &nbsp;
+                    <span className="custom-checkbox"></span>{props.preface}
                     <a target="_blank" href={props.optionLink} rel="noopener noreferrer">
                         {props.labelOption}
                     </a>

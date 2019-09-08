@@ -93,6 +93,9 @@ class SignUp extends React.Component {
                         <FormCheckBox id={"policy"} label={"Privacy Policy"} preface={<>I have read and accept the &nbsp;</>} labelOption={"privacy policy"} error={this.state.policyError} optionLink={"https://www.google.com/"} type={"checkbox"} onChange={e => this.setState({ policy: e.target.checked })} value={this.state.policy} />
                     </fieldset>
                     <button className="btn">Sign Up</button>
+                    <p className="form-alternate" onClick={this.props.onToggleForm}>
+                        Already have an account? <button className="alternate-text">Sign in here.</button>
+                    </p>
                 </form>
             </div>
         );

@@ -1,14 +1,27 @@
 import React, { Component } from "react";
 
-import { connect } from 'react-redux'; 
+import { connect } from "react-redux";
+import { verifyToken } from "./actions/index";
 
 import NavBar from "../src/components/elements/NavBar";
 import Home from "../src/components/pages/Home";
-import Forms from '../src/components/pages/Forms';
+import Forms from "../src/components/pages/Forms";
+
+import RedirectAuthTrue from "./helpers/RedirectAuthTrue";
+import RedirectPrivateRoute from "./helpers/RedirectPrivateRoute";
 
 import { BrowserRouter, Route } from "react-router-dom";
 
 class App extends Component {
+    componentDidMount() {
+        console.log("called app lifecycles")
+        if (localStorage.getItem("localtoken") && localStorage.getItem("authedUser")) {
+            console.log("called inner refresh")
+            const token = localStorage.getItem("localtoken");
+            this.props.dispatch(verifyToken(token));
+        }
+    }
+
     render() {
         return (
             <BrowserRouter>

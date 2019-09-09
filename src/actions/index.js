@@ -1,6 +1,7 @@
-import { API_BASE_URL } from '../config';
+import { API_BASE_URL } from "../config";
 
 const API = API_BASE_URL;
+const defaultToken = localStorage.getItem("localtoken") || null;
 
 export const SIGNUP_SUCCESS = "SIGNUP_SUCCESS";
 export const signUpSuccess = payload => ({
@@ -9,7 +10,6 @@ export const signUpSuccess = payload => ({
 });
 
 export const signUp = credentials => dispatch => {
-
     const url = API + "/users/signup";
     const payload = {
         method: "POST",
@@ -27,23 +27,24 @@ export const signUp = credentials => dispatch => {
 
             if (res.status === 201) {
                 console.log("got", res.status, credentials.username, credentials.password);
-                dispatch(signUpSuccess({
-                    success: true,
-                    username: credentials.username,
-                    password: credentials.password
-                }));
-            }
-            else {
-                return res.json()
+                dispatch(
+                    signUpSuccess({
+                        success: true,
+                        username: credentials.username,
+                        password: credentials.password
+                    })
+                );
+            } else {
+                return res
+                    .json()
                     .then(res => {
                         console.log("error", res);
                     })
-                    .catch(err => console.log("2error",err));
+                    .catch(err => console.log("2error", err));
             }
         })
-    .catch(err => console.log("1 error", err));
+        .catch(err => console.log("1 error", err));
 };
-
 
 export const SIGNIN_SUCCESS = "SIGNIN_SUCCESS";
 export const signInSuccess = payload => ({
@@ -61,7 +62,7 @@ export const signIn = credentials => dispatch => {
             "Content-Type": "application/json"
         }
     };
-    console.log("actions", payload)
+    console.log("actions", payload);
     return fetch(url, payload)
         .then(res => {
             if (!res.ok) {
@@ -76,9 +77,42 @@ export const signIn = credentials => dispatch => {
             localStorage.setItem("authedUser", userID);
         })
         .then(() => {
-            if (localStorage.getItem("localtoken") && localStorage.getItem("userID")) {
+            if (localStorage.getItem("localtoken") && localStorage.getItem("authedUser")) {
                 dispatch(signInSuccess(true));
             }
         })
-    .catch(err => alert("Username or Password do not match!"));
-}
+        .catch(err => alert("Username or Password do not match!"));
+};
+
+export const VERIFY_TOKEN_SUCCESS = "VERIFY_TOKEN_SUCCESS";
+export const verifyTokenSuccess = payload => ({
+    type: VERIFY_TOKEN_SUCCESS,
+    payload
+});
+
+export const verifyToken = token => dispatch => {
+    const url = API + "/auth/refresh";
+    const payload = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+        }
+    };
+
+    return fetch(url, payload)
+        .then(res => {
+            if (!res.ok) {
+                return Promise.reject(res.statusText);
+            } else if (res.status === 201) {
+                return res.json();
+            }
+        })
+        .then(res => {
+            console.log("success refresh,", res.authToken);
+            const token = res.authToken;
+            localStorage.setItem("localtoken", token);
+            dispatch(verifyTokenSuccess(true));
+        })
+        .catch(err => console.log(err));
+};

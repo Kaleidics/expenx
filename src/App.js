@@ -6,6 +6,7 @@ import { verifyToken } from "./actions/index";
 import NavBar from "../src/components/elements/NavBar";
 import Home from "../src/components/pages/Home";
 import Forms from "../src/components/pages/Forms";
+import Dashboard from "../src/components/pages/Dashboard";
 
 import RedirectAuthTrue from "./helpers/RedirectAuthTrue";
 import RedirectPrivateRoute from "./helpers/RedirectPrivateRoute";
@@ -28,7 +29,10 @@ class App extends Component {
                 <div className="App">
                     <Route path="/" component={NavBar} />
                     <Route exact path="/" component={Home} />
-                    <Route exact path="/signin" component={Forms} />
+                    {/* <Route exact path="/signin" component={Forms} /> */}
+                    {/* <Route path="/dashboard" component={Dashboard} /> */}
+                    <RedirectAuthTrue authed={this.props.auth} path="/signin" component={Forms} />
+                    <RedirectPrivateRoute authed={this.props.auth} path="/dashboard" component={Dashboard} />
                 </div>
             </BrowserRouter>
         );

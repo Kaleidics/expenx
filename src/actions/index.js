@@ -40,7 +40,7 @@ export const signUp = credentials => dispatch => {
                     .then(res => {
                         console.log("error", res);
                     })
-                    .catch(err => console.log("2error", err));
+                .catch(err => console.log("2error", err));
             }
         })
         .catch(err => console.log("1 error", err));

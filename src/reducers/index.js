@@ -3,7 +3,7 @@ import { SIGNUP_SUCCESS, SIGNIN_SUCCESS, VERIFY_TOKEN_SUCCESS } from "../actions
 const initialState = {
     auth: false,
     signUpState: {
-        success: true,
+        success: false,
         username: null,
         password: null
     }

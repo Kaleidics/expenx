@@ -84,6 +84,21 @@ export const signIn = credentials => dispatch => {
         .catch(err => alert("Username or Password do not match!"));
 };
 
+export const SIGN_OUT_SUCCESS = "SIGN_OUT_SUCCESS";
+export const signOutSuccess = payload => ({
+    type: SIGN_OUT_SUCCESS,
+    payload
+});
+
+export const signOut = () => dispatch => {
+    localStorage.removeItem("localtoken");
+    localStorage.removeItem("authedUser");
+    dispatch(signOutSuccess(false));
+}
+
+
+
+
 export const VERIFY_TOKEN_SUCCESS = "VERIFY_TOKEN_SUCCESS";
 export const verifyTokenSuccess = payload => ({
     type: VERIFY_TOKEN_SUCCESS,

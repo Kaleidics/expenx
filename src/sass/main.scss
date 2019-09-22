@@ -5,6 +5,7 @@
 @import "base/typography";
 @import "base/utilities";
 
+@import "components/dashbar";
 @import "components/navbar";
 @import "components/button";
 @import "components/forms";
@@ -13,3 +14,4 @@
 @import "layout/header";
 
 @import "pages/home";
+@import "pages/dashboard";

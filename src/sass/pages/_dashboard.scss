@@ -1,3 +1,8 @@
 .dashboard {
-    padding: 0 5%;
+    padding: 2rem 5%;
+    background: $white-2;
+
+    &__main-content {
+        margin: 1rem 0;
+    }
 }

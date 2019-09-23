@@ -1,0 +1,29 @@
+.overview-container {
+    width: 100%;
+    background: $white-1;
+    border-radius: 3px;
+    box-shadow: 3px 5px 8px -1px rgba($black-1, 0.15);
+    padding: 2rem;
+    animation: moveInLeft .65s ease-out backwards;
+
+    &__heading {
+        margin-bottom: 1rem;
+    }
+
+    &__list {
+        list-style-type: none;
+    }
+
+    &__list-item {
+        font-weight: 600;
+        font-size: 1.3rem;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.7rem;
+
+        &:first-of-type {
+            font-size: 1.5rem;
+            color: $primary-1;
+        }
+    }
+}

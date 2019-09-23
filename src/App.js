@@ -28,7 +28,7 @@ class App extends Component {
             <BrowserRouter>
                 <div className="App">
                     <Route path="/" component={NavBar} />
-                    <Route exact path="/" component={Home} />
+                    <Route exact path="/" component={Dashboard} />
                     {/* <Route exact path="/signin" component={Forms} /> */}
                     {/* <Route path="/dashboard" component={Dashboard} /> */}
                     <RedirectAuthTrue authed={this.props.auth} path="/signin" component={Forms} />

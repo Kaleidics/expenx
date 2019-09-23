@@ -10,6 +10,8 @@
     background: linear-gradient(90deg, $primary-1, $primary-2);
     border-radius: 3px;
     box-shadow: 3px 5px 8px -1px rgba($black-1, 0.15);
+    animation: moveInTop .6s ease-out backwards;
+
 
     @media screen and (min-width: 700px) {
         flex-direction: row;
@@ -23,20 +25,13 @@
     }
 
     &__title {
+        letter-spacing: 1px;
         margin-bottom: .5rem;
     }
 
     &__container {
         margin: 0 .5rem;
         padding: 1rem;
-
-        &:nth-of-type(1) {
-            border-right: 1px solid $white-1;
-        }
-
-        &:nth-of-type(3) {
-            border: 1px solid $white-1;
-        }
     }
 
     &__amount {

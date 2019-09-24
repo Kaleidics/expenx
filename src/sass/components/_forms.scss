@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     position: relative;
+    background-color: $white-1;
 }
 
 .label {
@@ -41,10 +42,14 @@
 }
 
 .select {
-    color: #6f6f6f;
+    color: $black-1;
     font-weight: 400;
     box-shadow: 0 2px 2px -1px rgba($black-1, 0.15);
-    background-color: transparent;
+    background-color: $white-1;
+    border: none;
+    border-radius: 3px;
+    padding: 1rem;
+    font-size: 1.4rem;
 }
 
 .checkbox-wrapper {

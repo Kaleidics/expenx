@@ -14,7 +14,6 @@ export default function FormSelect(props) {
         <div className="input-wrapper">
             <label className="label" htmlFor={props.id}>{props.label}</label>
             <select className="select" id={props.id} value={props.value} onChange={props.onChange}>
-                <option value="">Select your business</option>
                 {options}
             </select>
             <span className="input-error">{props.error}</span>

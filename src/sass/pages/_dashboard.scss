@@ -3,6 +3,8 @@
     background: $white-2;
 
     &__main-content {
+        display: flex;
+        flex-direction: column;
         margin: 1rem 0;
     }
 }

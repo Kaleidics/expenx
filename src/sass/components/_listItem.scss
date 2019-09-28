@@ -1,0 +1,17 @@
+.list-item {
+    margin: 1.5rem 0;
+    box-shadow: 3px 5px 8px -1px rgba($black-1, 0.1);
+    padding: 1.5rem 1rem;
+    border-radius: 3px;
+    background-color: $white-1;
+
+    &__inner {
+        display: flex;
+        justify-content: space-between;
+        font-size: 1.4rem;
+        font-weight: 700;
+        & > * {
+            width: 25%;
+        }
+    }
+}

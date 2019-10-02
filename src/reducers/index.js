@@ -1,4 +1,4 @@
-import { SIGNUP_SUCCESS, SIGNIN_SUCCESS, VERIFY_TOKEN_SUCCESS, SIGN_OUT_SUCCESS } from "../actions";
+import { SIGNUP_SUCCESS, SIGNIN_SUCCESS, VERIFY_TOKEN_SUCCESS, SIGN_OUT_SUCCESS, FETCH_EXPENSES_SUCCESS } from "../actions";
 
 const initialState = {
     auth: false,
@@ -6,7 +6,8 @@ const initialState = {
         success: false,
         username: null,
         password: null
-    }
+    },
+    expenses: []
 };
 
 export const Reducer = (state = initialState, action) => {
@@ -31,6 +32,12 @@ export const Reducer = (state = initialState, action) => {
     if (action.type === VERIFY_TOKEN_SUCCESS) {
         return Object.assign({}, state, {
             auth: action.payload
+        });
+    }
+
+    if (action.type === FETCH_EXPENSES_SUCCESS) {
+        return Object.assign({}, state, {
+            expenses: action.expenses
         });
     }
 

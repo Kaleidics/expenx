@@ -96,9 +96,7 @@ export const signOut = () => dispatch => {
     dispatch(signOutSuccess(false));
 }
 
-
-
-
+//refresh tokens
 export const VERIFY_TOKEN_SUCCESS = "VERIFY_TOKEN_SUCCESS";
 export const verifyTokenSuccess = payload => ({
     type: VERIFY_TOKEN_SUCCESS,
@@ -131,3 +129,26 @@ export const verifyToken = token => dispatch => {
         })
         .catch(err => console.log(err));
 };
+
+export const FETCH_EXPENSES_SUCCESS = "FETCH_EXPENSES_SUCCESS";
+export const fetchExpensesSuccess = expenses => ({
+    type: FETCH_EXPENSES_SUCCESS,
+    expenses
+});
+
+export const fetchExpenses = () => dispatch => {
+    const userid = localStorage.getItem("authedUser");
+    const url = `${API}/expenses/user/${userid}`;
+
+    return fetch(url)
+        .then(res => {
+            if (!res.ok) {
+                return Promise.reject(res.statusText);
+            }
+            return res.json();
+        })
+        .then(expenses => {
+            dispatch(fetchExpensesSuccess(expenses));
+        })
+    .catch(err => console.log(err));
+}

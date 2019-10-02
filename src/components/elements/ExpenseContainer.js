@@ -1,8 +1,20 @@
 import React from "react";
-import FormSelect from "../forms/FormSelect";
+import { connect } from 'react-redux';
 
-export default class ExpenseContainer extends React.Component {
+
+import FormSelect from "../forms/FormSelect";
+import ListItem from "./ListItem";
+
+class ExpenseContainer extends React.Component {
     render() {
+
+        //create the list items
+        let ListItems = this.props.expenses ? this.props.expenses.map((expense, index) => {
+            return (
+                <ListItem {...expense} index={index} key={expense._id} style={{ animationDelay: `${index / 15}s` }} />
+            );
+        }) : null ;
+
         return (
             <div className="expense-container">
                 <div className="expense-container__options">
@@ -17,30 +29,7 @@ export default class ExpenseContainer extends React.Component {
                         <p>Pay Date</p>
                     </div>
                     <ul className="expense-container__list">
-                        <li className="list-item">
-                            <div className="list-item__inner">
-                                <p>Netflix</p>
-                                <p>Monthly</p>
-                                <p>$11.99</p>
-                                <p>9/20/19</p>
-                            </div>
-                        </li>
-                        <li className="list-item">
-                            <div className="list-item__inner">
-                                <p>Netflix</p>
-                                <p>Monthly</p>
-                                <p>$11.99</p>
-                                <p>9/20/19</p>
-                            </div>
-                        </li>
-                        <li className="list-item">
-                            <div className="list-item__inner">
-                                <p>Netflix</p>
-                                <p>Monthly</p>
-                                <p>$11.99</p>
-                                <p>9/20/19</p>
-                            </div>
-                        </li>
+                        {ListItems}
                     </ul>
                 </div>
                 <div className="expense-container__navigation">
@@ -52,3 +41,9 @@ export default class ExpenseContainer extends React.Component {
         );
     }
 }
+
+const mapStateToProps = state => ({
+    expenses: state.app.expenses
+});
+
+export default connect(mapStateToProps)(ExpenseContainer);

@@ -1,9 +1,17 @@
 import React from "react";
+import { connect } from 'react-redux';
+
 import Dashbar from "../elements/DashBar";
 import OverviewContainer from "../elements/OverviewContainer";
 import ExpenseContainer from '../elements/ExpenseContainer';
+import { fetchExpenses } from '../../actions/index';
 
-export default class Dashboard extends React.Component {
+class Dashboard extends React.Component {
+
+    componentDidMount() {
+        this.props.dispatch(fetchExpenses());
+    }
+
     render() {
         return (
             <main className="dashboard">
@@ -20,3 +28,9 @@ export default class Dashboard extends React.Component {
         );
     }
 }
+
+const mapStateToProps = state => ({
+    auth: state.app.auth
+});
+
+export default connect(mapStateToProps)(Dashboard);

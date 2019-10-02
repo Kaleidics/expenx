@@ -15,5 +15,10 @@
     color: $black-1;
     font-weight: 400;
     background: none;
-    border: 1px solid rgba($primary-1, .5);
+    border: 1px solid rgba($black-1, .5);
+}
+
+.btn--solid {
+    width: 12rem;
+    background: lighten($primary-1, 15%);
 }

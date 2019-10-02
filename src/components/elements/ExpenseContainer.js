@@ -6,7 +6,7 @@ export default class ExpenseContainer extends React.Component {
         return (
             <div className="expense-container">
                 <div className="expense-container__options">
-                    <FormSelect options={["Active", "Archived"]} />
+                    <FormSelect options={["Active", "Archived", "All"]} />
                     <button className="btn btn--alt">Add Expense</button>
                 </div>
                 <div className="expense-container__content">
@@ -14,8 +14,7 @@ export default class ExpenseContainer extends React.Component {
                         <p>Expense</p>
                         <p>Type</p>
                         <p>Amount</p>
-                        <p>Due Date</p>
-                        
+                        <p>Pay Date</p>
                     </div>
                     <ul className="expense-container__list">
                         <li className="list-item">
@@ -23,7 +22,7 @@ export default class ExpenseContainer extends React.Component {
                                 <p>Netflix</p>
                                 <p>Monthly</p>
                                 <p>$11.99</p>
-                                <p>9/20/19</p>                                
+                                <p>9/20/19</p>
                             </div>
                         </li>
                         <li className="list-item">
@@ -31,7 +30,7 @@ export default class ExpenseContainer extends React.Component {
                                 <p>Netflix</p>
                                 <p>Monthly</p>
                                 <p>$11.99</p>
-                                <p>9/20/19</p>                                
+                                <p>9/20/19</p>
                             </div>
                         </li>
                         <li className="list-item">
@@ -39,10 +38,15 @@ export default class ExpenseContainer extends React.Component {
                                 <p>Netflix</p>
                                 <p>Monthly</p>
                                 <p>$11.99</p>
-                                <p>9/20/19</p>                                
+                                <p>9/20/19</p>
                             </div>
                         </li>
                     </ul>
+                </div>
+                <div className="expense-container__navigation">
+                    <button className="btn btn--solid">Previous</button>
+                    <FormSelect options={["10 rows", "25 rows", "50 rows"]} />
+                    <button className="btn btn--solid">Next</button>
                 </div>
             </div>
         );

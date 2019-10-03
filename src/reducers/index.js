@@ -7,7 +7,7 @@ const initialState = {
         username: null,
         password: null
     },
-    expenses: []
+    expenses: null
 };
 
 export const Reducer = (state = initialState, action) => {

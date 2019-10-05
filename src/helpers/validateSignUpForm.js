@@ -1,6 +1,6 @@
 const error = {
     a: "Please enter a valid Fullname.",
-    b: "Please enter a valid username.",
+    b: "Please enter a valid email address.",
     c: "Please enter a valid password.",
     d: "Password should have six characters.",
     e: "Password should have one uppercase character.",
@@ -27,7 +27,8 @@ export default function validate(payload) {
         errors.fullnameError = error.a;
     }
 
-    if (!username) {
+    //checks for valid email via @ character
+    if (!username || !/@/.test(username)) {
         errors.usernameError = error.b;
     }
 

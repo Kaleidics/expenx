@@ -31,7 +31,7 @@ class SignIn extends React.Component {
                 <form className="form" noValidate onSubmit={this.handleSubmit}>
                     <fieldset className="fieldset">
                         <legend className="legend">Sign In</legend>
-                        <FormInput id={"username"} label={"Username"} type={"text"} error={this.state.usernameError} onChange={e => this.setState({ username: e.target.value })} value={this.state.username} />
+                        <FormInput id={"username"} label={"Email"} type={"text"} error={this.state.usernameError} onChange={e => this.setState({ username: e.target.value })} value={this.state.username} />
                         <FormInput id={"password"} label={"Password"} type={"password"} error={this.state.passwordError} onChange={e => this.setState({ password: e.target.value })} value={this.state.password} />
                         <FormCheckBox id={"persistSignIn"} preface={<>Stay signed in</>} label={"Keep me signed in"} type={"checkbox"} onChange={e => this.setState({ persistSignIn: e.target.checked })} value={this.state.persistSignIn} />
                     </fieldset>

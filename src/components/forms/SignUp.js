@@ -86,7 +86,7 @@ class SignUp extends React.Component {
                     <fieldset className="fieldset">
                         <legend className="legend">let's get started</legend>
                         <FormInput id={"fullname"} label={"Full name"} type={"text"} error={this.state.fullnameError} onChange={e => this.setState({ fullname: e.target.value })} value={this.state.fullname} />
-                        <FormInput id={"username"} label={"Create a Username"} type={"text"} error={this.state.usernameError} onChange={e => this.setState({ username: e.target.value })} value={this.state.username} />
+                        <FormInput id={"username"} label={"Enter your email"} type={"text"} error={this.state.usernameError} onChange={e => this.setState({ username: e.target.value })} value={this.state.username} />
                         <FormInput id={"password"} label={"Password"} tooltip={" 6 characters | 1 uppercase | 1 lowercase | 1 digit"} type={"password"} error={this.state.passwordError} onChange={e => this.setState({ password: e.target.value })} value={this.state.password} />
                         <FormInput id={"confirmPassword"} label={"Confirm Password"} type={"password"} error={this.state.confirmPasswordError} onChange={e => this.setState({ confirmPassword: e.target.value })} value={this.state.confirmPassword} />
                         <FormCheckBox id={"terms"} label={"Terms of Service"} preface={<>I have read and accept the &nbsp;</>} labelOption={"terms of services"} error={this.state.termsError} optionLink={"https://www.google.com/"} type={"checkbox"} onChange={e => this.setState({ terms: e.target.checked })} value={this.state.terms} />

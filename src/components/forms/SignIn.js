@@ -28,7 +28,7 @@ class SignIn extends React.Component {
     render() {
         return (
             <div className="form-wrapper">
-                <form className="form" noValidate onSubmit={this.handleSubmit}>
+                <form className="form animate-left" noValidate onSubmit={this.handleSubmit}>
                     <fieldset className="fieldset">
                         <legend className="legend">Sign In</legend>
                         <FormInput id={"username"} label={"Email"} type={"text"} error={this.state.usernameError} onChange={e => this.setState({ username: e.target.value })} value={this.state.username} />

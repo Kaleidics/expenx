@@ -82,7 +82,7 @@ class SignUp extends React.Component {
     render() {
         return (
             <div className="form-wrapper">
-                <form className="form" noValidate onSubmit={this.handleSubmit}>
+                <form className="form animate-right" noValidate onSubmit={this.handleSubmit}>
                     <fieldset className="fieldset">
                         <legend className="legend">let's get started</legend>
                         <FormInput id={"fullname"} label={"Full name"} type={"text"} error={this.state.fullnameError} onChange={e => this.setState({ fullname: e.target.value })} value={this.state.fullname} />

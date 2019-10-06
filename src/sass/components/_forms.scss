@@ -149,6 +149,13 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
+}
+
+.animate-left {
+    animation: moveInLeft 0.3s ease-out backwards;
+}
+
+.animate-right {
     animation: moveInRight 0.3s ease-out backwards;
 }
 

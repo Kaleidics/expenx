@@ -19,7 +19,7 @@ class ExpenseContainer extends React.Component {
             <div className="expense-container">
                 <div className="expense-container__options">
                     <FormSelect options={["Active", "Archived", "All"]} />
-                    <button className="btn btn--alt">Add Expense</button>
+                    <button className="btn btn--alt" onClick={this.props.handleContent}>Add Expense</button>
                 </div>
                 <div className="expense-container__content">
                     <div className="expense-container__list-header">

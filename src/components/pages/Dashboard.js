@@ -13,7 +13,7 @@ class Dashboard extends React.Component {
         super(props);
 
         this.state = {
-            toggleContent: true
+            toggleContent: false
         }
     }
 
@@ -42,6 +42,7 @@ class Dashboard extends React.Component {
                     <div className="dashboard__main-content--left">
                         <OverviewContainer />
                     </div>
+                    {/* Decides if we want to show expenses list or to add a new expense */}
                     <div className="dashboard__main-content--right">
                         {content_right}
                     </div>

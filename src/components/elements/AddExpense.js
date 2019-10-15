@@ -1,11 +1,11 @@
 import React from "react";
 
+import { connect } from 'react-redux';
+import { createExpense } from '../../actions/index';
+
 import FormInput from "../forms/FormInput";
 import FormSelect from "../forms/FormSelect"
 import FormTextArea from "../forms/FormTextArea"
-
-
-import FormatDate from "../../helpers/FormatDate"
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -13,13 +13,23 @@ import "react-datepicker/dist/react-datepicker.css";
 class AddExpense extends React.Component {
 
     state = {
-        expiration: new Date()
+        expiration: new Date(),
+        expense: "",
+        amount: "",
+        expenseType: "One Time",
+        status: "Active",
+        notes: ""
+    }
+
+    handleSubmit = e => {
+        e.preventDefault();
+        this.props.createExpense(this.state);
     }
 
     setExpiration = date => this.setState({expiration: date });
 
     render() {
-        console.log("current date", this.state.expiration)
+        console.log("current date", this.props.createResponse)
         return (
             <div className="addExpense-container animate-left">
                 <div className="addExpense-container__options">
@@ -29,7 +39,7 @@ class AddExpense extends React.Component {
                 </div>
 
                 <div className="addExpense-container__form-container">
-                    <form className="addExpense-container__form">
+                    <form className="addExpense-container__form" onSubmit={this.handleSubmit}>
                         <fieldset className="addExpense-container__fieldset">
                             <legend className="addExpense-container__legend">Add a new expense</legend>
                             <div className="addExpense-container__form-one">
@@ -38,8 +48,8 @@ class AddExpense extends React.Component {
                                     label={"Expense"}
                                     type={"text"}
                                     // error={this.state.fullnameError}
-                                    // onChange={e => this.setState({ fullname: e.target.value })}
-                                    // value={this.state.fullname}
+                                    onChange={e => this.setState({ expense: e.target.value })}
+                                    value={this.state.expense}
                                 />
                                 <FormInput
                                     id={"expense_amount"}
@@ -47,8 +57,8 @@ class AddExpense extends React.Component {
                                     type={"number"}
                                     step={"0.01"}
                                     // error={this.state.fullnameError}
-                                    // onChange={e => this.setState({ fullname: e.target.value })}
-                                    // value={this.state.fullname}
+                                    onChange={e => this.setState({ amount: e.target.value })}
+                                    value={this.state.amount}
                                 />
                             </div>
                             <div className="addExpense-container__form-two">
@@ -57,16 +67,16 @@ class AddExpense extends React.Component {
                                     label={"Expense Type"}
                                     options={["One Time", "Daily", "Weekly", "Monthly", "Year"]}
                                     // error={this.state.typeError}
-                                    // onChange={e => this.setState({ type: e.target.value })}
-                                    // value={this.state.type}
+                                    onChange={e => this.setState({ expenseType: e.target.value })}
+                                    value={this.state.expenseType}
                                 />
                                 <FormSelect
                                     id={"expense_status"}
                                     label={"Status"}
                                     options={["Active", "Paid", "Archived"]}
                                     // error={this.state.typeError}
-                                    // onChange={e => this.setState({ type: e.target.value })}
-                                    // value={this.state.type}
+                                    onChange={e => this.setState({ status: e.target.value })}
+                                    // value={this.state.status}
                                 />
                                 <div className="addExpense-datepicker">
                                     <label className="label">Date</label>
@@ -81,8 +91,8 @@ class AddExpense extends React.Component {
                                     rows={"5"}
                                     cols={"10"}
                                     // error={this.state.fullnameError}
-                                    // onChange={e => this.setState({ fullname: e.target.value })}
-                                    // value={this.state.fullname}
+                                    onChange={e => this.setState({ notes: e.target.value })}
+                                    value={this.state.notes}
                                 />
                             </div>
                         </fieldset>
@@ -96,4 +106,19 @@ class AddExpense extends React.Component {
     }
 }
 
-export default AddExpense;
+const mapStateToProps = state => ({
+    createResponse: state.app.createResponse
+});
+
+const mapDispatchToProps = dispatch => {
+    return {
+        createExpense: expense => {
+            dispatch(createExpense(expense));
+        }
+    };
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(AddExpense);

@@ -13,7 +13,7 @@ class Dashboard extends React.Component {
         super(props);
 
         this.state = {
-            toggleContent: true
+            toggleContent: false
         }
     }
 

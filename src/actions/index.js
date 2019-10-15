@@ -152,3 +152,32 @@ export const fetchExpenses = () => dispatch => {
         })
     .catch(err => console.log(err));
 }
+
+export const CREATE_EXPENSE_SUCCESS = "CREATE_EXPENSE_SUCCESS";
+export const createExpenseSuccess = expense => ({
+    type: CREATE_EXPENSE_SUCCESS,
+    expense
+});
+
+export const createExpense = expense => dispatch => {
+    const url = API + '/expenses/';
+
+    return fetch(url, {
+        method: "POST",
+        body: JSON.stringify(expense),
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${defaultToken}`
+        }
+    })
+    .then(res => {
+        if (!res.ok) {
+            return Promise.reject(res.statusText)
+        }
+        return res.json();
+    })
+    .then(expense => {
+        dispatch(createExpenseSuccess(expense));
+    })
+    .catch(err => console.log(err));
+}

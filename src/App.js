@@ -7,6 +7,7 @@ import NavBar from "../src/components/elements/NavBar";
 import Home from "../src/components/pages/Home";
 import Forms from "../src/components/pages/Forms";
 import Dashboard from "../src/components/pages/Dashboard";
+import UniversalMessage from "../src/components/elements/UniversalMessage";
 
 import RedirectAuthTrue from "./helpers/RedirectAuthTrue";
 import RedirectPrivateRoute from "./helpers/RedirectPrivateRoute";
@@ -27,6 +28,7 @@ class App extends Component {
         return (
             <BrowserRouter>
                 <div className="App">
+                    <UniversalMessage />
                     <Route path="/" component={NavBar} />
                     <Route exact path="/" component={Home} />
                     {/* <Route exact path="/signin" component={Forms} /> */}

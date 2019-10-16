@@ -1,5 +1,7 @@
 import { API_BASE_URL } from "../config";
 
+import sleeper from "../helpers/Sleeper";
+
 const API = API_BASE_URL;
 const defaultToken = localStorage.getItem("localtoken") || null;
 
@@ -156,7 +158,14 @@ export const fetchExpenses = () => dispatch => {
 export const CREATE_EXPENSE_SUCCESS = "CREATE_EXPENSE_SUCCESS";
 export const createExpenseSuccess = expense => ({
     type: CREATE_EXPENSE_SUCCESS,
-    expense
+    expense,
+    success: "Success"
+});
+
+export const CLEAR_UNI_MSG = "CLEAR_UNI_MSG";
+export const clearUniMsg = clear => ({
+    type: CLEAR_UNI_MSG,
+    clear
 });
 
 export const createExpense = expense => dispatch => {
@@ -179,5 +188,7 @@ export const createExpense = expense => dispatch => {
     .then(expense => {
         dispatch(createExpenseSuccess(expense));
     })
+    .then(sleeper(3000))
+    .then(() => dispatch(clearUniMsg("")))
     .catch(err => console.log(err));
 }

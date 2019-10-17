@@ -1,4 +1,4 @@
-import { SIGNUP_SUCCESS, SIGNIN_SUCCESS, VERIFY_TOKEN_SUCCESS, SIGN_OUT_SUCCESS, FETCH_EXPENSES_SUCCESS, CREATE_EXPENSE_SUCCESS, CLEAR_UNI_MSG } from "../actions";
+import { SIGNUP_SUCCESS, SIGNIN_SUCCESS, VERIFY_TOKEN_SUCCESS, SIGN_OUT_SUCCESS, FETCH_EXPENSES_SUCCESS, CREATE_EXPENSE_SUCCESS, SET_UNI_MSG } from "../actions";
 
 const initialState = {
     auth: false,
@@ -50,10 +50,10 @@ export const Reducer = (state = initialState, action) => {
         });
     }
 
-    if (action.type === CLEAR_UNI_MSG) {
+    if (action.type === SET_UNI_MSG) {
         console.log("CLEARED", action.clear)
         return Object.assign({}, state, {
-            universalMessage: action.clear
+            universalMessage: action.msg
         });
     }
 

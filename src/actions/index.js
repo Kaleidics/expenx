@@ -67,8 +67,10 @@ export const signIn = credentials => dispatch => {
     console.log("actions", payload);
     return fetch(url, payload)
         .then(res => {
-            if (!res.ok) {
-                return Promise.reject(res.statusText);
+            if (!res.ok && res.status === 401) {
+                dispatch(setUniMsg("Wrong Username or Password!"));
+                return sleeper(3000)
+                    .then(() => dispatch(setUniMsg("")));
             }
             return res.json();
         })
@@ -83,7 +85,7 @@ export const signIn = credentials => dispatch => {
                 dispatch(signInSuccess(true));
             }
         })
-        .catch(err => alert("Username or Password do not match!"));
+        .catch(err => console.log(err));
 };
 
 export const SIGN_OUT_SUCCESS = "SIGN_OUT_SUCCESS";
@@ -162,10 +164,10 @@ export const createExpenseSuccess = expense => ({
     success: "Success"
 });
 
-export const CLEAR_UNI_MSG = "CLEAR_UNI_MSG";
-export const clearUniMsg = clear => ({
-    type: CLEAR_UNI_MSG,
-    clear
+export const SET_UNI_MSG = "SET_UNI_MSG";
+export const setUniMsg = msg => ({
+    type: SET_UNI_MSG,
+    msg
 });
 
 export const createExpense = expense => dispatch => {
@@ -189,6 +191,6 @@ export const createExpense = expense => dispatch => {
         dispatch(createExpenseSuccess(expense));
     })
     .then(sleeper(3000))
-    .then(() => dispatch(clearUniMsg("")))
+    .then(() => dispatch(setUniMsg("")))
     .catch(err => console.log(err));
 }

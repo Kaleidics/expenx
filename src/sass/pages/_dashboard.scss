@@ -1,6 +1,6 @@
 .dashboard {
     padding: 2rem 5%;
-    background: $white-2;
+    background: lighten($white-2, 10%);
 
     &__main-content {
         display: flex;

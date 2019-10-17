@@ -199,6 +199,7 @@
     height: 100vh;
     z-index: 2;
     background: $white-1;
+    margin-top: .3rem;
 
     &__container {
         display: flex;
@@ -215,10 +216,11 @@
 
     &__heading {
         color: $black-1;
-        font-size: 1.6rem;
+        font-size: 2rem;
         display: flex;
         flex-direction: column;
         text-align: center;
         font-weight: 400;
+        line-height: 2;
     }
 }

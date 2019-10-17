@@ -15,10 +15,11 @@
     justify-content: center;
     align-items: center;
     animation: leftAndOut 3s ease-out forwards;
+    padding: 0 1.5rem;
 
         p {
             color: $white-1;
-            font-size: 2rem;
+            font-size: 1.9rem;
             font-weight: 600;
             letter-spacing: 1px;
         }

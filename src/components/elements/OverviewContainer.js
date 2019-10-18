@@ -33,8 +33,32 @@ export default class OverviewContainer extends React.Component {
                         <span>$100.00</span>
                     </li>
                     <li className="overview-container__list-item">
+                        <span>June</span>
+                        <span>$100.00</span>
+                    </li>
+                    <li className="overview-container__list-item">
+                        <span>July</span>
+                        <span>$670.00</span>
+                    </li>
+                    <li className="overview-container__list-item">
+                        <span>August</span>
+                        <span>$4400.00</span>
+                    </li>
+                    <li className="overview-container__list-item">
+                        <span>September</span>
+                        <span>$1.00</span>
+                    </li>
+                    <li className="overview-container__list-item">
+                        <span>October</span>
+                        <span>$0.00</span>
+                    </li>
+                    <li className="overview-container__list-item">
+                        <span>November</span>
+                        <span>$0.95</span>
+                    </li>
+                    <li className="overview-container__list-item">
                         <span>December</span>
-                        <span>$10000000.00</span>
+                        <span>$0.69</span>
                     </li>
                 </ul>
             </div>

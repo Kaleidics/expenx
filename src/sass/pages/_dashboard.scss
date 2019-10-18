@@ -1,10 +1,23 @@
 .dashboard {
     padding: 2rem 5%;
-    background: lighten($white-2, 10%);
+    background: lighten($white-2, 5%);
 
     &__main-content {
         display: flex;
         flex-direction: column;
         margin: 1rem 0;
+
+        @media screen and (min-width: 1024px) {
+            flex-direction: row;
+        }
+
+        &--right {
+            @media screen and (min-width: 1024px) {
+                width: 100%;
+                margin-left: 2rem;
+            }
+        }
     }
+
+
 }

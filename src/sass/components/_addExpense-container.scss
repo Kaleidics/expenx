@@ -1,5 +1,7 @@
 .addExpense-container {
-
+    @media screen and (min-width: 1024px) {
+            animation: moveInRight .5s ease-out backwards;
+        }
     &__options {
         margin: 1rem 0;
         display: flex;
@@ -28,6 +30,31 @@
         display: flex;
         justify-content: center;
         margin: 1.5rem 0;
+    }
+
+    &__form-half {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 80%;
+        margin: 0 auto;
+        
+        @media screen and (min-width: 1024px) {
+            flex-direction: row;
+        }
+    }
+
+    &__form-one {
+        @media screen and (min-width: 1024px) {
+            width: 40%;
+            
+        }
+    }
+
+    &__form-two {
+        @media screen and (min-width: 1024px) {
+            width: 40%;
+        }
     }
 
     &__form-three {

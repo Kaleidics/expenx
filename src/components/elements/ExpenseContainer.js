@@ -11,7 +11,7 @@ class ExpenseContainer extends React.Component {
         //create the list items
         let ListItems = this.props.expenses ? this.props.expenses.map((expense, index) => {
             return (
-                <ListItem {...expense} index={index} key={expense._id} style={{ animationDelay: `${index / 15}s` }} />
+                <ListItem {...expense} index={index} key={expense._id} style={{ animationDelay: `${(index / 15)}s` }} />
             );
         }) : null ;
 

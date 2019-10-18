@@ -23,13 +23,15 @@ class AddExpense extends React.Component {
 
     handleSubmit = e => {
         e.preventDefault();
+        console.log(this.state)
         this.props.createExpense(this.state);
     }
 
     setExpiration = date => this.setState({expiration: date });
 
     render() {
-        console.log("current date", this.props.createResponse)
+        let today = new Date();
+        console.log("current date", today);
         return (
             <div className="addExpense-container animate-left">
                 <div className="addExpense-container__options">
@@ -42,45 +44,48 @@ class AddExpense extends React.Component {
                     <form className="addExpense-container__form" onSubmit={this.handleSubmit}>
                         <fieldset className="addExpense-container__fieldset">
                             <legend className="addExpense-container__legend">Add a new expense</legend>
-                            <div className="addExpense-container__form-one">
-                                <FormInput
-                                    id={"expense_name"}
-                                    label={"Expense"}
-                                    type={"text"}
-                                    // error={this.state.fullnameError}
-                                    onChange={e => this.setState({ expense: e.target.value })}
-                                    value={this.state.expense}
-                                />
-                                <FormInput
-                                    id={"expense_amount"}
-                                    label={"Amount"}
-                                    type={"number"}
-                                    step={"0.01"}
-                                    // error={this.state.fullnameError}
-                                    onChange={e => this.setState({ amount: e.target.value })}
-                                    value={this.state.amount}
-                                />
-                            </div>
-                            <div className="addExpense-container__form-two">
-                                <FormSelect
-                                    id={"expense_type"}
-                                    label={"Expense Type"}
-                                    options={["One Time", "Daily", "Weekly", "Monthly", "Year"]}
-                                    // error={this.state.typeError}
-                                    onChange={e => this.setState({ expenseType: e.target.value })}
-                                    value={this.state.expenseType}
-                                />
-                                <FormSelect
-                                    id={"expense_status"}
-                                    label={"Status"}
-                                    options={["Active", "Paid", "Archived"]}
-                                    // error={this.state.typeError}
-                                    onChange={e => this.setState({ status: e.target.value })}
-                                    // value={this.state.status}
-                                />
-                                <div className="addExpense-datepicker">
-                                    <label className="label">Date</label>
-                                    <DatePicker selected={this.state.expiration} onChange={this.setExpiration} />
+                            <div className="addExpense-container__form-half">
+
+                                <div className="addExpense-container__form-one">
+                                    <FormInput
+                                        id={"expense_name"}
+                                        label={"Expense"}
+                                        type={"text"}
+                                        // error={this.state.fullnameError}
+                                        onChange={e => this.setState({ expense: e.target.value })}
+                                        value={this.state.expense}
+                                    />
+                                    <FormInput
+                                        id={"expense_amount"}
+                                        label={"Amount"}
+                                        type={"number"}
+                                        step={"0.01"}
+                                        // error={this.state.fullnameError}
+                                        onChange={e => this.setState({ amount: e.target.value })}
+                                        value={this.state.amount}
+                                    />
+                                </div>
+                                <div className="addExpense-container__form-two">
+                                    <FormSelect
+                                        id={"expense_type"}
+                                        label={"Expense Type"}
+                                        options={["One Time", "Daily", "Weekly", "Monthly", "Year"]}
+                                        // error={this.state.typeError}
+                                        onChange={e => this.setState({ expenseType: e.target.value })}
+                                        value={this.state.expenseType}
+                                    />
+                                    <FormSelect
+                                        id={"expense_status"}
+                                        label={"Status"}
+                                        options={["Active", "Paid", "Archived"]}
+                                        // error={this.state.typeError}
+                                        onChange={e => this.setState({ status: e.target.value })}
+                                        // value={this.state.status}
+                                    />
+                                    <div className="addExpense-datepicker">
+                                        <label className="label">Date</label>
+                                        <DatePicker selected={this.state.expiration} onChange={this.setExpiration} />
+                                    </div>
                                 </div>
                             </div>
                             <div className="addExpense-container__form-three">

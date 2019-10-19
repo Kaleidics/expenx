@@ -3,7 +3,6 @@ import { API_BASE_URL } from "../config";
 import sleeper from "../helpers/Sleeper";
 
 const API = API_BASE_URL;
-const defaultToken = localStorage.getItem("localtoken") || null;
 
 export const SIGNUP_SUCCESS = "SIGNUP_SUCCESS";
 export const signUpSuccess = payload => ({
@@ -73,7 +72,6 @@ export const signIn = credentials => dispatch => {
         .then(res => {
             if (!res.ok && res.status === 401 || res.status !=200) {
                 dispatch(setUniMsg("Wrong Username or Password!"));
-
             }
             return res.json();
         })
@@ -180,13 +178,14 @@ export const setUniMsg = msg => ({
 
 export const createExpense = expense => dispatch => {
     const url = API + '/expenses/';
+    const localToken = localStorage.getItem("localtoken");
 
     return fetch(url, {
         method: "POST",
         body: JSON.stringify(expense),
         headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${defaultToken}`
+            Authorization: `Bearer ${localToken}`
         }
     })
     .then(res => {

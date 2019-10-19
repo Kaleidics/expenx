@@ -2,7 +2,6 @@ export default function FormatDate(dateString) {
     let seconds = Date.parse(dateString);
     let localized = new Date(seconds);
     let converted = localized.toString();
-    console.log("converted", converted)
     let d = converted.slice(4, 15).split(" ");
     d.splice(0, 3, d[0], d[1], d[2]);
 

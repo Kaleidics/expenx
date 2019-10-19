@@ -1,7 +1,7 @@
 .addExpense-container {
     @media screen and (min-width: 1024px) {
-            animation: moveInRight .5s ease-out backwards;
-        }
+        animation: moveInRight 0.5s ease-out backwards;
+    }
     &__options {
         margin: 1rem 0;
         display: flex;
@@ -9,7 +9,6 @@
     }
 
     &__form {
-        
     }
 
     &__fieldset {
@@ -37,7 +36,7 @@
         flex-direction: column;
         justify-content: space-between;
         margin: 0 auto;
-        
+
         @media screen and (min-width: 1024px) {
             flex-direction: row;
             width: 80%;
@@ -47,7 +46,6 @@
     &__form-one {
         @media screen and (min-width: 1024px) {
             width: 40%;
-            
         }
     }
 
@@ -63,9 +61,11 @@
             max-width: 100%;
             color: $black-1;
             font-weight: 400;
-            box-shadow: 0 2px 2px -1px rgba($black-1, 0.2);
+            border: 1px solid lighten($black-1, 70%);
+            box-shadow: 2px 3px 8px rgba($black-1, .1);
+            outline-color: $primary-1;
             background-color: $white-1;
-            border: none;
+            
             border-radius: 3px;
             padding: 1rem;
             font-size: 1.4rem;
@@ -73,51 +73,74 @@
     }
 }
 
-
 //3rd party component
 
 .addExpense-datepicker {
-    
     margin: 1.5rem 0;
-
 }
 
 .react-datepicker-wrapper {
     width: 100%;
     border: none;
-   
+    box-shadow: 0 2px 2px -1px rgba($black-1, 0.2);
 }
 
 .react-datepicker__input-container {
     width: 100%;
     border: none;
-    
 
     input {
         width: 100%;
         padding: 1rem;
         border: none;
-        box-shadow: 0 2px 2px -1px rgba($black-1, 0.1);
+        outline-color: $primary-1;
+        border-radius: 3px;
     }
 }
 
-//override the blackbox styling
+//override blackbox styling
 .react-datepicker {
-  font-size: 1.3rem !important;
-}
+    font-size: 1.3rem !important;
 
-.react-datepicker__current-month {
-  font-size: 1.5rem !important;
-}
+    &__header {
+        background-color: $primary-1 !important;
+        padding-top: 6px !important;
+    }
 
-.react-datepicker__header {
-  padding-top: 6px !important;
-}
+    &__current-month {
+        font-size: 1.5rem !important;
+        color: $white-1 !important;
+    }
 
-.react-datepicker__navigation {
-  top: 13px !important;
-}
+    &__navigation {
+        top: 13px !important;
 
-.react-datepicker__day-name, .react-datepicker__day {
-  margin: 0.5rem !important;
+        &--next {
+            border-left-color: $white-1;
+        }
+
+        &--previous {
+            border-right-color: $white-1;
+        }
+    }
+
+    &__day-name {
+        margin: 0.5rem !important;
+        color: white;
+    }
+
+    &__day {
+        margin: 0.5rem !important;
+        &:hover {
+            background: $primary-1;
+            color: $white-1;
+        }
+        &--selected {
+            background: $primary-1;
+
+            &:hover {
+                background: darken($primary-1, 10%);
+            }
+        }
+    }
 }

@@ -3,10 +3,10 @@
         margin: 1rem 0;
         display: flex;
         justify-content: space-between;
-        animation: moveInLeft .5s ease-out backwards;
+        animation: moveInLeft .35s ease-out backwards;
 
         @media screen and (min-width: 1024px) {
-            animation: moveInTop .5s ease-out backwards;
+            animation: moveInTop .35s ease-out backwards;
         }
     }
 
@@ -21,10 +21,10 @@
         font-weight: 700;
         color: $primary-1;
         padding: 1rem;
-        animation: moveInLeft .5s ease-out backwards;
+        animation: moveInLeft .4s ease-out backwards;
 
         @media screen and (min-width: 1024px) {
-            animation: moveInTop .5s ease-out backwards;
+            animation: moveInTop .4s ease-out backwards;
         }
         
         p {

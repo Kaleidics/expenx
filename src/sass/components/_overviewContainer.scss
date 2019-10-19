@@ -5,10 +5,10 @@
     border-radius: 3px;
     box-shadow: 3px 5px 8px -1px rgba($black-1, 0.15);
     padding: 2rem;
-    animation: moveInLeft .45s ease-out backwards;
+    animation: moveInLeft .3s ease-out backwards;
 
     @media screen and (min-width: 1024px) {
-        animation: moveInLeft .5s ease-out backwards;
+        animation: moveInLeft .4s ease-out backwards;
     }
 
     &__heading {

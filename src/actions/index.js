@@ -149,8 +149,15 @@ export const fetchExpensesSuccess = expenses => ({
 export const fetchExpenses = () => dispatch => {
     const userid = localStorage.getItem("authedUser");
     const url = `${API}/expenses/user/${userid}`;
+    const localToken = localStorage.getItem("localtoken");
 
-    return fetch(url)
+    return fetch(url, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localToken}`
+            }
+        })
         .then(res => {
             if (!res.ok) {
                 return Promise.reject(res.statusText);
@@ -160,7 +167,38 @@ export const fetchExpenses = () => dispatch => {
         .then(expenses => {
             dispatch(fetchExpensesSuccess(expenses));
         })
-    .catch(err => console.log(err));
+        .catch(err => console.log(err));
+}
+
+export const FETCH_TOTAL_SUCCESS = "FETCH_TOTAL_SUCCESS";
+export const fetchTotalSuccess = total => ({
+    type: FETCH_TOTAL_SUCCESS,
+    total
+});
+
+export const fetchTotal = () => dispatch => {
+    const userid = localStorage.getItem("authedUser");
+    const url = `${API}/expenses/user_sum/${userid}`;
+    const localToken = localStorage.getItem("localtoken");
+
+    return fetch(url, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localToken}`
+            }
+        })
+        .then(res => {
+            if (!res.ok) {
+                return Promise.reject(res.statusText);
+            }
+            return res.json();
+        })
+        .then(data => {
+            let total = data[0].total.$numberDecimal;
+            dispatch(fetchTotalSuccess(total));
+        })
+        .catch(err => console.log(err));
 }
 
 export const CREATE_EXPENSE_SUCCESS = "CREATE_EXPENSE_SUCCESS";
@@ -196,6 +234,7 @@ export const createExpense = expense => dispatch => {
     })
     .then(expense => {
         dispatch(createExpenseSuccess(expense));
+        dispatch(fetchTotal());
     })
     .then(sleeper(3000))
     .then(() => dispatch(setUniMsg("")))

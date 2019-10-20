@@ -1,11 +1,15 @@
 import React from "react";
 import FormatDate from "../../helpers/FormatDate";
 
+import FormatNum from "../../helpers/FormatNumber";
+
 export default class ListItem extends React.Component {
     render() {
+        console.log(this.props)
         const { expense, expenseType } = this.props;
-        const amount = this.props.amount.$numberDecimal;
+        const amount = FormatNum(this.props.amount.$numberDecimal);
         const expiration = FormatDate(this.props.expiration);
+        
         return (
             <li className="list-item" style={this.props.style}>
                 <div className="list-item__inner">

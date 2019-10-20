@@ -1,4 +1,4 @@
-import { SIGNUP_SUCCESS, SIGNIN_SUCCESS, VERIFY_TOKEN_SUCCESS, SIGN_OUT_SUCCESS, FETCH_EXPENSES_SUCCESS, CREATE_EXPENSE_SUCCESS, SET_UNI_MSG } from "../actions";
+import { SIGNUP_SUCCESS, SIGNIN_SUCCESS, VERIFY_TOKEN_SUCCESS, SIGN_OUT_SUCCESS, FETCH_EXPENSES_SUCCESS, CREATE_EXPENSE_SUCCESS, SET_UNI_MSG, FETCH_TOTAL_SUCCESS } from "../actions";
 
 const initialState = {
     auth: false,
@@ -9,6 +9,7 @@ const initialState = {
     },
     expenses: null,
     universalMessage: null,
+    total: ""
 };
 
 export const Reducer = (state = initialState, action) => {
@@ -39,6 +40,12 @@ export const Reducer = (state = initialState, action) => {
     if (action.type === FETCH_EXPENSES_SUCCESS) {
         return Object.assign({}, state, {
             expenses: action.expenses
+        });
+    }
+
+    if (action.type === FETCH_TOTAL_SUCCESS) {
+        return Object.assign({}, state, {
+            total: action.total
         });
     }
 

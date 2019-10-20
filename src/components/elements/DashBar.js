@@ -1,7 +1,19 @@
 import React from 'react';
+import { connect } from "react-redux";
 
-export default class extends React.Component {
+import FormatNum from "../../helpers/FormatNumber";
+
+import { fetchTotal } from "../../actions/index";
+
+class DashBar extends React.Component {
+
+    componentDidMount() {
+        this.props.dispatch(fetchTotal());
+    }
+
     render() {
+        const total = FormatNum(this.props.total);
+        
         return (
             <div className="dashbar">
                 <div className="dashbar__primary">
@@ -19,7 +31,7 @@ export default class extends React.Component {
                     </div>
                     <div className="vertical-bar"></div>
                     <div className="dashbar__container">
-                        <p className="dashbar__amount">$20,000.00</p>
+                        <p className="dashbar__amount">${total}</p>
                         <p className="dashbar__date">To This Date</p>
                     </div>
                 </div>
@@ -27,3 +39,9 @@ export default class extends React.Component {
         );
     }
 }
+
+const mapStateToProps = state => ({
+    total: state.app.total
+});
+
+export default connect(mapStateToProps)(DashBar);

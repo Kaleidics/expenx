@@ -170,6 +170,51 @@ export const fetchExpenses = () => dispatch => {
         .catch(err => console.log(err));
 }
 
+//fetch the total expenses for each month
+export const FETCH_MONTHS_SUCCESS = "FETCH_MONTHS_SUCCESS";
+export const fetchMonthsSuccess = months => ({
+    type: FETCH_MONTHS_SUCCESS,
+    months
+});
+
+export const fetchMonths = () => dispatch => {
+    const userid = localStorage.getItem("authedUser");
+    const url = `${API}/expenses/user_month/${userid}`;
+    const localToken = localStorage.getItem("localtoken");
+
+    return fetch(url, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localToken}`
+            }
+        })
+        .then(res => {
+            if (!res.ok) {
+                return Promise.reject(res.statusText);
+            }
+            return res.json();
+        })
+        .then(months => {
+            dispatch(fetchMonthsSuccess(months));
+        })
+        .catch(err => console.log(err));
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const FETCH_TOTAL_SUCCESS = "FETCH_TOTAL_SUCCESS";
 export const fetchTotalSuccess = total => ({
     type: FETCH_TOTAL_SUCCESS,

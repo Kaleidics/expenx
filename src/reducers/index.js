@@ -1,4 +1,4 @@
-import { SIGNUP_SUCCESS, SIGNIN_SUCCESS, VERIFY_TOKEN_SUCCESS, SIGN_OUT_SUCCESS, FETCH_EXPENSES_SUCCESS, CREATE_EXPENSE_SUCCESS, SET_UNI_MSG, FETCH_TOTAL_SUCCESS } from "../actions";
+import { SIGNUP_SUCCESS, SIGNIN_SUCCESS, VERIFY_TOKEN_SUCCESS, SIGN_OUT_SUCCESS, FETCH_EXPENSES_SUCCESS, CREATE_EXPENSE_SUCCESS, SET_UNI_MSG, FETCH_TOTAL_SUCCESS, FETCH_MONTHS_SUCCESS } from "../actions";
 
 const initialState = {
     auth: false,
@@ -7,8 +7,9 @@ const initialState = {
         username: null,
         password: null
     },
-    expenses: null,
     universalMessage: null,
+    expenses: null,
+    months: null,
     total: ""
 };
 
@@ -37,12 +38,21 @@ export const Reducer = (state = initialState, action) => {
         });
     }
 
+    //fetch all expenses
     if (action.type === FETCH_EXPENSES_SUCCESS) {
         return Object.assign({}, state, {
             expenses: action.expenses
         });
     }
 
+    //fetch the sum of expenses for each month
+    if (action.type === FETCH_MONTHS_SUCCESS) {
+        return Object.assign({}, state, {
+            months: action.months
+        });
+    }
+
+    //fetch the sum of all expenses to date
     if (action.type === FETCH_TOTAL_SUCCESS) {
         return Object.assign({}, state, {
             total: action.total

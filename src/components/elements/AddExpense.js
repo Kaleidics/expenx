@@ -11,23 +11,33 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 class AddExpense extends React.Component {
+    constructor(props) {
+        super(props);
 
-    state = {
-        expiration: new Date(),
-        expense: "",
-        amount: "",
-        expenseType: "One Time",
-        status: "Active",
-        notes: ""
+        this.state = {
+            expiration: new Date(),
+            expense: "",
+            amount: "",
+            expenseType: "One Time",
+            status: "Active",
+            notes: ""
+        }
+    }
+    
+    componentDidUpdate() {
+        if (this.props.universalMessage === "Success") {
+            this.props.handleContent();
+        }
     }
 
     handleSubmit = e => {
         e.preventDefault();
-        console.log(this.state)
         this.props.createExpense(this.state);
+        console.log("add expense: !", this.props.universalMessage)
+        
     }
 
-    setExpiration = date => this.setState({expiration: date });
+    setExpiration = date => this.setState({ expiration: date });
 
     render() {
         let today = new Date();
@@ -112,7 +122,8 @@ class AddExpense extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    createResponse: state.app.createResponse
+    createResponse: state.app.createResponse,
+    universalMessage: state.app.universalMessage
 });
 
 const mapDispatchToProps = dispatch => {

@@ -1,67 +1,58 @@
 import React from "react";
+import { connect } from "react-redux";
+import { fetchMonths } from "../../actions/index";
+import FormatNum from "../../helpers/FormatNumber"
 
-export default class OverviewContainer extends React.Component {
+class OverviewContainer extends React.Component {
+
+    componentDidMount() {
+        this.props.dispatch(fetchMonths());
+    }
+
     render() {
+        console.log("months", this.props.months);
+
+        const monthRefs = {
+            1: "January",
+            2: "February",
+            3: "March",
+            4: "April",
+            5: "May",
+            6: "June",
+            7: "July",
+            8: "August",
+            9: "September",
+            10: "October",
+            11: "November",
+            12: "December"
+        }
+
+        let monthAmounts = this.props.months ? this.props.months.map(month => {
+            return (
+                <li className="overview-container__list-item" key={monthRefs[month._id]}>
+                    <span>{monthRefs[month._id]}</span>
+                    <span>${FormatNum(month.total.$numberDecimal)}</span>
+                </li>
+            );
+        }) : null;
+        
         return (
             <div className="overview-container">
-                <h2 className="overview-container__heading">
-                    Monthly Expenses
-                </h2>
+                <h2 className="overview-container__heading">Monthly Expenses</h2>
                 <ul className="overview-container__list">
                     <li className="overview-container__list-item">
                         <span>Month</span>
                         <span>Amount</span>
                     </li>
-                    <li className="overview-container__list-item">
-                        <span>January</span>
-                        <span>$100.00</span>
-                    </li>
-                    <li className="overview-container__list-item">
-                        <span>February</span>
-                        <span>$1.00</span>
-                    </li>
-                    <li className="overview-container__list-item">
-                        <span>March</span>
-                        <span>$1001.11</span>
-                    </li>
-                    <li className="overview-container__list-item">
-                        <span>April</span>
-                        <span>$56.00</span>
-                    </li>
-                    <li className="overview-container__list-item">
-                        <span>May</span>
-                        <span>$100.00</span>
-                    </li>
-                    <li className="overview-container__list-item">
-                        <span>June</span>
-                        <span>$100.00</span>
-                    </li>
-                    <li className="overview-container__list-item">
-                        <span>July</span>
-                        <span>$670.00</span>
-                    </li>
-                    <li className="overview-container__list-item">
-                        <span>August</span>
-                        <span>$4400.00</span>
-                    </li>
-                    <li className="overview-container__list-item">
-                        <span>September</span>
-                        <span>$1.00</span>
-                    </li>
-                    <li className="overview-container__list-item">
-                        <span>October</span>
-                        <span>$0.00</span>
-                    </li>
-                    <li className="overview-container__list-item">
-                        <span>November</span>
-                        <span>$0.95</span>
-                    </li>
-                    <li className="overview-container__list-item">
-                        <span>December</span>
-                        <span>$0.69</span>
-                    </li>
+                    {monthAmounts}
                 </ul>
             </div>
         );
     }
 }
+
+const mapStateToProps = state => ({
+    months: state.app.months
+});
+
+export default connect(mapStateToProps)(OverviewContainer);

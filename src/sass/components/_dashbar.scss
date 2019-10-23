@@ -32,6 +32,7 @@
     &__container {
         margin: 0 .5rem;
         padding: 1rem;
+        animation: moveInRight .6s ease-out backwards;
     }
 
     &__amount {

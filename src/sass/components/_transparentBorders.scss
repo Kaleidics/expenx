@@ -8,3 +8,7 @@
     height: 2px;
     background-color: rgba($white-1, .3);
 }
+
+.bar-animate-down {
+    animation: moveInTop .7s ease-out backwards;
+}

@@ -27,12 +27,12 @@ class DashBar extends React.Component {
                         <p className="dashbar__amount">${week}</p>
                         <p className="dashbar__date">This Week</p>
                     </div>
-                    <div className="vertical-bar bar-animate-down" style={{ animationDelay: ".3s" }}></div>
+                    <div className="vertical-bar bar-animate-down" style={{ animationDelay: ".6s" }}></div>
                     <div className="dashbar__container" style={{ animationDelay: ".2s" }}>
                         <p className="dashbar__amount">$500.00</p>
                         <p className="dashbar__date">This Month</p>
                     </div>
-                    <div className="vertical-bar bar-animate-down"></div>
+                    <div className="vertical-bar bar-animate-down" style={{ animationDelay: ".4s" }}></div>
                     <div className="dashbar__container" style={{ animationDelay: ".1s" }}>
                         <p className="dashbar__amount">${total}</p>
                         <p className="dashbar__date">To This Date</p>

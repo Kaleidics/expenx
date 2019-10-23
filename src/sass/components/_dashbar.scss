@@ -32,12 +32,16 @@
     &__container {
         margin: 0 .5rem;
         padding: 1rem;
-        animation: moveInRight .6s ease-out backwards;
+        animation: moveInRight .7s ease-out backwards;
     }
 
     &__amount {
         font-size: 1.6rem;
         margin-bottom: 0.5rem;
+        max-width: 10rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;   
     }
 
     &__date {

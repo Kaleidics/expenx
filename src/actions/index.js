@@ -233,20 +233,6 @@ export const fetchWeek = () => dispatch => {
         .catch(err => console.log(err));
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 export const FETCH_TOTAL_SUCCESS = "FETCH_TOTAL_SUCCESS";
 export const fetchTotalSuccess = total => ({
     type: FETCH_TOTAL_SUCCESS,
@@ -311,7 +297,11 @@ export const createExpense = expense => dispatch => {
     })
     .then(expense => {
         dispatch(createExpenseSuccess(expense));
+        dispatch(fetchWeek());
         dispatch(fetchTotal());
+
+        //for the left overview container
+        dispatch(fetchMonths());
     })
     .then(sleeper(3000))
     .then(() => dispatch(setUniMsg("")))

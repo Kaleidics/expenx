@@ -201,6 +201,38 @@ export const fetchMonths = () => dispatch => {
         .catch(err => console.log(err));
 }
 
+//fetch the total expenses for current day
+export const FETCH_WEEK_SUCCESS = "FETCH_WEEK_SUCCESS";
+export const fetchWeekSuccess = week => ({
+    type: FETCH_WEEK_SUCCESS,
+    week
+});
+
+export const fetchWeek = () => dispatch => {
+    const userid = localStorage.getItem("authedUser");
+    const url = `${API}/expenses/user_current_week/${userid}`;
+    const localToken = localStorage.getItem("localtoken");
+
+    return fetch(url, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localToken}`
+            }
+        })
+        .then(res => {
+            if (!res.ok) {
+                return Promise.reject(res.statusText);
+            }
+            return res.json();
+        })
+        .then(data => {
+            let week = data[0].total.$numberDecimal;
+            dispatch(fetchWeekSuccess(week));
+        })
+        .catch(err => console.log(err));
+}
+
 
 
 

@@ -3,17 +3,20 @@ import { connect } from "react-redux";
 
 import FormatNum from "../../helpers/FormatNumber";
 
-import { fetchTotal } from "../../actions/index";
+import { fetchTotal, fetchWeek } from "../../actions/index";
 
 class DashBar extends React.Component {
 
     componentDidMount() {
         this.props.dispatch(fetchTotal());
+        this.props.dispatch(fetchWeek());
     }
 
     render() {
         const total = FormatNum(this.props.total);
-        
+        const week = FormatNum(this.props.week);
+        console.log("day", week)
+        console.log("total", this.props.total)
         return (
             <div className="dashbar">
                 <div className="dashbar__primary">
@@ -21,7 +24,7 @@ class DashBar extends React.Component {
                 </div>
                 <div className="dashbar__secondary">
                     <div className="dashbar__container">
-                        <p className="dashbar__amount">$333.00</p>
+                        <p className="dashbar__amount">${week}</p>
                         <p className="dashbar__date">This Week</p>
                     </div>
                     <div className="vertical-bar"></div>
@@ -41,7 +44,8 @@ class DashBar extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    total: state.app.total
+    total: state.app.total,
+    week: state.app.week
 });
 
 export default connect(mapStateToProps)(DashBar);

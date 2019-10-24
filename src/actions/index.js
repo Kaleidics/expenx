@@ -233,6 +233,37 @@ export const fetchWeek = () => dispatch => {
         .catch(err => console.log(err));
 }
 
+export const FETCH_MONTH_SUCCESS = "FETCH_MONTH_SUCCESS";
+export const fetchMonthSuccess = month => ({
+    type: FETCH_MONTH_SUCCESS,
+    month
+});
+
+export const fetchMonth = () => dispatch => {
+    const userid = localStorage.getItem("authedUser");
+    const url = `${API}/expenses/user_current_month/${userid}`;
+    const localToken = localStorage.getItem("localtoken");
+
+    return fetch(url, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localToken}`
+            }
+        })
+        .then(res => {
+            if (!res.ok) {
+                return Promise.reject(res.statusText);
+            }
+            return res.json();
+        })
+        .then(data => {
+            let month = data[0].total.$numberDecimal;
+            dispatch(fetchMonthSuccess(month));
+        })
+        .catch(err => console.log(err));
+}
+
 export const FETCH_TOTAL_SUCCESS = "FETCH_TOTAL_SUCCESS";
 export const fetchTotalSuccess = total => ({
     type: FETCH_TOTAL_SUCCESS,
@@ -298,6 +329,7 @@ export const createExpense = expense => dispatch => {
     .then(expense => {
         dispatch(createExpenseSuccess(expense));
         dispatch(fetchWeek());
+        dispatch(fetchMonth());
         dispatch(fetchTotal());
 
         //for the left overview container

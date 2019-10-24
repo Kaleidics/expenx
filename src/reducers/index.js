@@ -1,4 +1,4 @@
-import { SIGNUP_SUCCESS, SIGNIN_SUCCESS, VERIFY_TOKEN_SUCCESS, SIGN_OUT_SUCCESS, FETCH_EXPENSES_SUCCESS, CREATE_EXPENSE_SUCCESS, SET_UNI_MSG, FETCH_TOTAL_SUCCESS, FETCH_MONTHS_SUCCESS, FETCH_WEEK_SUCCESS } from "../actions";
+import { SIGNUP_SUCCESS, SIGNIN_SUCCESS, VERIFY_TOKEN_SUCCESS, SIGN_OUT_SUCCESS, FETCH_EXPENSES_SUCCESS, CREATE_EXPENSE_SUCCESS, SET_UNI_MSG, FETCH_TOTAL_SUCCESS, FETCH_MONTHS_SUCCESS, FETCH_WEEK_SUCCESS, FETCH_MONTH_SUCCESS } from "../actions";
 
 const initialState = {
     auth: false,
@@ -11,6 +11,7 @@ const initialState = {
     expenses: null,
     months: null,
     week: null,
+    month: null,
     total: ""
 };
 
@@ -64,6 +65,12 @@ export const Reducer = (state = initialState, action) => {
         return Object.assign({}, state, {
             week: action.week
         })
+    }
+
+    if (action.type === FETCH_MONTH_SUCCESS) {
+        return Object.assign({}, state, {
+            month: action.month
+        });
     }
 
     if (action.type === CREATE_EXPENSE_SUCCESS) {

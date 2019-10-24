@@ -19,7 +19,7 @@ class App extends Component {
         console.log("called app lifecycles")
         if (localStorage.getItem("localtoken") && localStorage.getItem("authedUser")) {
             console.log("called inner refresh")
-            const token = localStorage.getItem("localtoken");
+            let token = localStorage.getItem("localtoken");
             this.props.dispatch(verifyToken(token));
         }
     }

@@ -3,20 +3,21 @@ import { connect } from "react-redux";
 
 import FormatNum from "../../helpers/FormatNumber";
 
-import { fetchTotal, fetchWeek } from "../../actions/index";
+import { fetchTotal, fetchWeek, fetchMonth } from "../../actions/index";
 
 class DashBar extends React.Component {
 
     componentDidMount() {
         this.props.dispatch(fetchTotal());
         this.props.dispatch(fetchWeek());
+        this.props.dispatch(fetchMonth());
     }
 
     render() {
-        const total = FormatNum(this.props.total);
-        const week = FormatNum(this.props.week);
-        console.log("day", week)
-        console.log("total", this.props.total)
+        let total = FormatNum(this.props.total),
+        month = FormatNum(this.props.month),
+        week = FormatNum(this.props.week);
+        
         return (
             <div className="dashbar">
                 <div className="dashbar__primary">
@@ -29,7 +30,7 @@ class DashBar extends React.Component {
                     </div>
                     <div className="vertical-bar bar-animate-down" style={{ animationDelay: ".6s" }}></div>
                     <div className="dashbar__container" style={{ animationDelay: ".2s" }}>
-                        <p className="dashbar__amount">$500.00</p>
+                        <p className="dashbar__amount">${month}</p>
                         <p className="dashbar__date">This Month</p>
                     </div>
                     <div className="vertical-bar bar-animate-down" style={{ animationDelay: ".4s" }}></div>
@@ -45,7 +46,8 @@ class DashBar extends React.Component {
 
 const mapStateToProps = state => ({
     total: state.app.total,
-    week: state.app.week
+    week: state.app.week,
+    month: state.app.month
 });
 
 export default connect(mapStateToProps)(DashBar);

@@ -9,24 +9,31 @@ class ExpenseContainer extends React.Component {
         super();
 
         this.state = {
-            displayRows: 10
+            displayRows: 10,
+            displayStatus: "Active"
         }
     }
 
-    //set the number of expenses to display
-    setDisplayRows = rowLength => {
+
+
+    setDisplayStatus = status => {
         this.setState({
-            displayRows: rowLength
+            displayStatus: status
         });
     }
 
     render() {
-        
+        console.log("status", this.state.displayStatus)
+        console.log(this.props.expenses)
+        //create array of expense filtered by their status
+        let filteredListItems = this.props.expenses ? this.props.expenses.filter(expense => expense.status == this.state.displayStatus ) : null;
+        console.log(filteredListItems)
         //create array of expense sorted by creation date
-        let sortedListItems = this.props.expenses ? this.props.expenses.sort((a, b) => {
+        let sortedListItems = filteredListItems ? filteredListItems.sort((a, b) => {
               return new Date(b.createdAt) - new Date(a.createdAt);
         }) : null ;
 
+        console.log(sortedListItems)
         //create the list items from the sorted listed items
         let ListItems = sortedListItems ? sortedListItems.slice(0, this.state.displayRows).map((expense, index) => {
             return (
@@ -34,11 +41,17 @@ class ExpenseContainer extends React.Component {
             );
         }) : null ;
 
+        console.log(ListItems)
         return (
             <div className="expense-container">
                 <div className="expense-container__options">
-                    <FormSelect options={["Active", "Archived", "All"]} />
-                    <button className="btn btn--alt" onClick={this.props.handleContent}>Add Expense</button>
+                    <FormSelect
+                        options={["Active", "Archived", "All"]}
+                        onChange={e => this.setState({ displayStatus: e.target.value })}
+                    />
+                    <button className="btn btn--alt" onClick={this.props.handleContent}>
+                        Add Expense
+                    </button>
                 </div>
                 <div className="expense-container__content">
                     <div className="expense-container__list-header">
@@ -47,13 +60,11 @@ class ExpenseContainer extends React.Component {
                         <p>Amount</p>
                         <p>Pay Date</p>
                     </div>
-                    <ul className="expense-container__list">
-                        {ListItems}
-                    </ul>
+                    <ul className="expense-container__list">{ListItems}</ul>
                 </div>
                 <div className="expense-container__navigation">
                     <button className="btn btn--solid">Previous</button>
-                    <FormSelect options={[ 10, 25, 50]} onChangeRow={this.setDisplayRows} />
+                    <FormSelect options={[10, 25, 50]} onChange={e => this.setState({ displayRows: e.target.value })} />
                     <button className="btn btn--solid">Next</button>
                 </div>
             </div>

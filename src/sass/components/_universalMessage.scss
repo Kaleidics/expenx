@@ -3,14 +3,13 @@
     left: 50%;
     top: 15%;
     transform: translate(-50%, -50%);
-    width: 60%;
+    width: 90%;
     max-width: 50rem;
     height: 10%;
     max-height: 5rem;
     z-index: 100;
     border-radius: 3px;
     box-shadow: 3px 5px 8px -1px rgba($primary-1, 0.1);
-    background: linear-gradient(90deg, $primary-1, $primary-2);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22,6 +21,15 @@
             font-size: 1.9rem;
             font-weight: 600;
             letter-spacing: 1px;
+            text-align: center;
         }
     
+}
+
+.success {
+    background: linear-gradient(to bottom right, darken($green-1, 2%), darken($green-1, 5%));
+}
+
+.failure {
+    background: linear-gradient(to bottom right, lighten($red-2, 10%), $red-2);
 }

@@ -8,6 +8,7 @@ const initialState = {
         password: null
     },
     universalMessage: null,
+    universalMessageColor: null,
     expenses: null,
     months: null,
     week: null,
@@ -77,14 +78,16 @@ export const Reducer = (state = initialState, action) => {
         console.log("reducercreate")
         return Object.assign({}, state, {
             expenses: [action.expense, ...state.expenses],
-            universalMessage: action.success
+            universalMessage: action.success,
+            universalMessageColor: action.color,
         });
     }
 
     if (action.type === SET_UNI_MSG) {
         console.log("CLEARED", action.clear)
         return Object.assign({}, state, {
-            universalMessage: action.msg
+            universalMessage: action.msg,
+            universalMessageColor: action.color
         });
     }
 

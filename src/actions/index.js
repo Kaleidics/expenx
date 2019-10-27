@@ -24,9 +24,9 @@ export const signUp = credentials => dispatch => {
         .then(res => {
             if (!res.ok) {
                 return res.json()
-                    .then(res => dispatch(setUniMsg(res.message)))
+                    .then(res => dispatch(setUniMsg(res.message, "failed")))
                     .then(sleeper(2500))
-                    .then(() => dispatch(setUniMsg("")))
+                    .then(() => dispatch(setUniMsg("", "")))
                 .catch(err => console.log(err));   
             }
 
@@ -71,7 +71,7 @@ export const signIn = credentials => dispatch => {
     return fetch(url, payload)
         .then(res => {
             if (!res.ok && res.status === 401 || res.status !=200) {
-                dispatch(setUniMsg("Wrong Username or Password!"));
+                dispatch(setUniMsg("Wrong Username or Password!", "failed"));
             }
             return res.json();
         })
@@ -88,7 +88,7 @@ export const signIn = credentials => dispatch => {
         })
         .catch(err => {
             setTimeout(function() {
-                    dispatch(setUniMsg(""));
+                    dispatch(setUniMsg("", ""));
                 }, 2500);
                 console.log("");
         });
@@ -299,13 +299,15 @@ export const CREATE_EXPENSE_SUCCESS = "CREATE_EXPENSE_SUCCESS";
 export const createExpenseSuccess = expense => ({
     type: CREATE_EXPENSE_SUCCESS,
     expense,
-    success: "Success"
+    success: "Success",
+    color: "success"
 });
 
 export const SET_UNI_MSG = "SET_UNI_MSG";
-export const setUniMsg = msg => ({
+export const setUniMsg = (msg, status) => ({
     type: SET_UNI_MSG,
-    msg
+    msg,
+    color: status
 });
 
 export const createExpense = expense => dispatch => {
@@ -336,6 +338,6 @@ export const createExpense = expense => dispatch => {
         dispatch(fetchMonths());
     })
     .then(sleeper(3000))
-    .then(() => dispatch(setUniMsg("")))
+    .then(() => dispatch(setUniMsg("", "")))
     .catch(err => console.log(err));
 }

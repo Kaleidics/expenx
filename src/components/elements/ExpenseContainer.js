@@ -1,15 +1,34 @@
 import React from "react";
 import { connect } from 'react-redux';
 
-
 import FormSelect from "../forms/FormSelect";
 import ListItem from "./ListItem";
 
 class ExpenseContainer extends React.Component {
-    render() {
+    constructor(props) {
+        super();
 
-        //create the list items
-        let ListItems = this.props.expenses ? this.props.expenses.map((expense, index) => {
+        this.state = {
+            displayRows: 10
+        }
+    }
+
+    //set the number of expenses to display
+    setDisplayRows = rowLength => {
+        this.setState({
+            displayRows: rowLength
+        });
+    }
+
+    render() {
+        
+        //create array of expense sorted by creation date
+        let sortedListItems = this.props.expenses ? this.props.expenses.sort((a, b) => {
+              return new Date(b.createdAt) - new Date(a.createdAt);
+        }) : null ;
+
+        //create the list items from the sorted listed items
+        let ListItems = sortedListItems ? sortedListItems.slice(0, this.state.displayRows).map((expense, index) => {
             return (
                 <ListItem {...expense} index={index} key={expense._id} style={{ animationDelay: `${(index / 15)}s` }} />
             );
@@ -34,7 +53,7 @@ class ExpenseContainer extends React.Component {
                 </div>
                 <div className="expense-container__navigation">
                     <button className="btn btn--solid">Previous</button>
-                    <FormSelect options={["10 rows", "25 rows", "50 rows"]} />
+                    <FormSelect options={[ 10, 25, 50]} onChangeRow={this.setDisplayRows} />
                     <button className="btn btn--solid">Next</button>
                 </div>
             </div>

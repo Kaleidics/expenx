@@ -14,26 +14,16 @@ class ExpenseContainer extends React.Component {
         }
     }
 
-
-
-    setDisplayStatus = status => {
-        this.setState({
-            displayStatus: status
-        });
-    }
-
     render() {
-        console.log("status", this.state.displayStatus)
-        console.log(this.props.expenses)
+        
         //create array of expense filtered by their status
         let filteredListItems = this.props.expenses ? this.props.expenses.filter(expense => expense.status == this.state.displayStatus ) : null;
-        console.log(filteredListItems)
+    
         //create array of expense sorted by creation date
         let sortedListItems = filteredListItems ? filteredListItems.sort((a, b) => {
               return new Date(b.createdAt) - new Date(a.createdAt);
         }) : null ;
 
-        console.log(sortedListItems)
         //create the list items from the sorted listed items
         let ListItems = sortedListItems ? sortedListItems.slice(0, this.state.displayRows).map((expense, index) => {
             return (
@@ -41,7 +31,6 @@ class ExpenseContainer extends React.Component {
             );
         }) : null ;
 
-        console.log(ListItems)
         return (
             <div className="expense-container">
                 <div className="expense-container__options">

@@ -5,6 +5,7 @@ import Dashbar from "../elements/DashBar";
 import OverviewContainer from "../elements/OverviewContainer";
 import ExpenseContainer from '../elements/ExpenseContainer';
 import AddExpense from "../elements/AddExpense";
+import ExpenseChart from "../elements/ExpenseChart";
 
 import { fetchExpenses } from '../../actions/index';
 
@@ -38,6 +39,9 @@ class Dashboard extends React.Component {
         return (
             <main className="dashboard">
                 <Dashbar />
+                <div className="dashboard__chart-container">
+                    <ExpenseChart />
+                </div>
                 <section className="dashboard__main-content">
                     <div className="dashboard__main-content--left">
                         <OverviewContainer />

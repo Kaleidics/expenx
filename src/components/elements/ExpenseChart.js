@@ -1,7 +1,8 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
+import { connect } from "react-redux";
 
-export default class ExpenseChart extends React.Component {
+class ExpenseChart extends React.Component {
     constructor(props) {
         super(props);
 
@@ -31,6 +32,27 @@ export default class ExpenseChart extends React.Component {
     }
 
     render() {
+        const monthRefs = {
+            1: "January",
+            2: "February",
+            3: "March",
+            4: "April",
+            5: "May",
+            6: "June",
+            7: "July",
+            8: "August",
+            9: "September",
+            10: "October",
+            11: "November",
+            12: "December",
+        };
+
+        let labels = this.props.months && this.props.months.map(month => {
+            return month.total.$numberDecimal;
+        });
+
+        console.log(labels)
+        console.log("expense", this.props.months)
         return (
             <div className="expenseChart">
                 <h2 className="expenseChart__name">{this.props.graphname}</h2>
@@ -60,3 +82,9 @@ export default class ExpenseChart extends React.Component {
         );
     }
 }
+
+const mapStateToProps = state => ({
+    months: state.app.months,
+});
+
+export default connect(mapStateToProps)(ExpenseChart);

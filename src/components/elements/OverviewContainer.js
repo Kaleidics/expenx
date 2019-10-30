@@ -27,7 +27,11 @@ class OverviewContainer extends React.Component {
             12: "December"
         }
 
-        let monthAmounts = this.props.months ? this.props.months.map(month => {
+        let sortMonths = this.props.months && this.props.months.sort((a,b) => {
+            return a._id - b._id
+        });
+
+        let monthAmounts = sortMonths ? sortMonths.map(month => {
             return (
                 <li className="overview-container__list-item" key={monthRefs[month._id]}>
                     <span>{monthRefs[month._id]}</span>

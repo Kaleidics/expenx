@@ -6,6 +6,7 @@ import OverviewContainer from "../elements/OverviewContainer";
 import ExpenseContainer from '../elements/ExpenseContainer';
 import AddExpense from "../elements/AddExpense";
 import ExpenseChart from "../elements/ExpenseChart";
+import ChartContainer from "../elements/ChartContainer";
 
 import { fetchExpenses } from '../../actions/index';
 
@@ -29,6 +30,46 @@ class Dashboard extends React.Component {
     }
 
     render() {
+         const monthRefs = {
+             1: "January",
+             2: "February",
+             3: "March",
+             4: "April",
+             5: "May",
+             6: "June",
+             7: "July",
+             8: "August",
+             9: "September",
+             10: "October",
+             11: "November",
+             12: "December",
+         };
+
+         let rawlabels =
+             this.props.months &&
+             this.props.months.map(month => {
+                 return month._id;
+             });
+
+         let sortedLabels =
+             rawlabels &&
+             rawlabels.sort((a, b) => {
+                 return a - b;
+             });
+
+        let labels =
+            sortedLabels &&
+            sortedLabels.map(month => {
+                return monthRefs[month];
+            });
+
+        let expenses =
+            this.props.months &&
+            this.props.months.map(month => {
+                return month.total.$numberDecimal;
+            });
+
+   
         //conditional for choosing the expenses view or the add expenses view
         let content_right = this.state.toggleContent ? (
             <ExpenseContainer handleContent={this.handleContent} />
@@ -36,20 +77,18 @@ class Dashboard extends React.Component {
             <AddExpense handleContent={this.handleContent} />
         );
 
+        console.log("labels", labels)
+        console.log("labels", expenses)
         return (
             <main className="dashboard">
                 <Dashbar />
-                <div className="dashboard__chart-container">
-                    <ExpenseChart />
-                </div>
+                <ChartContainer monthLabels={labels} monthExpenses={expenses}/>
                 <section className="dashboard__main-content">
                     <div className="dashboard__main-content--left">
                         <OverviewContainer />
                     </div>
                     {/* Decides if we want to show expenses list or to add a new expense */}
-                    <div className="dashboard__main-content--right">
-                        {content_right}
-                    </div>
+                    <div className="dashboard__main-content--right">{content_right}</div>
                 </section>
             </main>
         );
@@ -57,7 +96,8 @@ class Dashboard extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    auth: state.app.auth
+    auth: state.app.auth,
+    months: state.app.months,
 });
 
 export default connect(mapStateToProps)(Dashboard);

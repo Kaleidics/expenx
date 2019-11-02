@@ -29,6 +29,7 @@
         display: flex;
         justify-content: space-between;
         margin-bottom: 1rem;
+        animation: moveInTop .5s ease-out backwards;
 
         &:first-of-type {
             font-size: 1.5rem;

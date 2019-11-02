@@ -8,7 +8,6 @@ import logofinal from "../../assets/logofinal.png";
 
 class NavBar extends Component {
     render() {
-        console.log("nav", this.props.auth, this.props.location)
         return (
             <nav className="navbar">
                 <div className="navbar__container">

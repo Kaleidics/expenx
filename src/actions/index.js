@@ -31,7 +31,6 @@ export const signUp = credentials => dispatch => {
             }
 
             if (res.status === 201) {
-                console.log("got", res.status, credentials.username, credentials.password);
                 dispatch(
                     signUpSuccess({
                         success: true,
@@ -67,7 +66,7 @@ export const signIn = credentials => dispatch => {
             "Content-Type": "application/json"
         }
     };
-    console.log("actions", payload);
+
     return fetch(url, payload)
         .then(res => {
             if (!res.ok && res.status === 401 || res.status !=200) {
@@ -132,7 +131,6 @@ export const verifyToken = token => dispatch => {
             }
         })
         .then(res => {
-            console.log("success refresh,", res.authToken);
             const token = res.authToken;
             localStorage.setItem("localtoken", token);
             dispatch(verifyTokenSuccess(true));

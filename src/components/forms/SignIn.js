@@ -20,7 +20,6 @@ class SignIn extends React.Component {
     }
 
     handleSubmit(e) {
-        console.log("triggered signin");
         e.preventDefault();
         this.props.signIn(this.state);
     }

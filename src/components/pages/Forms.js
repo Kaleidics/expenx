@@ -52,9 +52,6 @@ class Forms extends Component {
     }
 
     render() {
-        console.log("auth", this.props.auth);
-        console.log("togglemessage", this.state.toggleMessage);
-        console.log("redux state", this.props.signUpState.success);
         let formMessage = (
             <div className="form-message">
                 <div className="form-message__container">
@@ -70,7 +67,6 @@ class Forms extends Component {
                 </div>
             </div>
         );
-        console.log("toggle", this.state.toggleMessage);
         return (
             <main>
                 {this.state.toggleMessage ? formMessage : null}

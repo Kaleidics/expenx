@@ -71,7 +71,7 @@ class SignUp extends React.Component {
                     username: this.state.username,
                     password: this.state.password
                 }
-                console.log(credentials);
+    
                 this.props.signUp(credentials);
             }
         });

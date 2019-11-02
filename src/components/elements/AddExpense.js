@@ -33,15 +33,13 @@ class AddExpense extends React.Component {
     handleSubmit = e => {
         e.preventDefault();
         this.props.createExpense(this.state);
-        console.log("add expense: !", this.props.universalMessage)
-        
     }
 
     setExpiration = date => this.setState({ expiration: date });
 
     render() {
         let today = new Date();
-        console.log("current date", today);
+  
         return (
             <div className="addExpense-container animate-left">
                 <div className="addExpense-container__options">

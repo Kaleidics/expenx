@@ -56,6 +56,8 @@
     }
 
     &__form-three {
+        width: 100%;
+        
         textarea {
             width: 100%;
             max-width: 100%;
@@ -69,6 +71,10 @@
             border-radius: 3px;
             padding: 1rem;
             font-size: 1.4rem;
+        }
+        @media screen and (min-width: 1024px) {
+            width: 80%;
+            margin: 0 auto;
         }
     }
 }

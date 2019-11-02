@@ -30,44 +30,6 @@ class Dashboard extends React.Component {
     }
 
     render() {
-         const monthRefs = {
-             1: "January",
-             2: "February",
-             3: "March",
-             4: "April",
-             5: "May",
-             6: "June",
-             7: "July",
-             8: "August",
-             9: "September",
-             10: "October",
-             11: "November",
-             12: "December",
-         };
-
-         let rawlabels =
-             this.props.months &&
-             this.props.months.map(month => {
-                 return month._id;
-             });
-
-         let sortedLabels =
-             rawlabels &&
-             rawlabels.sort((a, b) => {
-                 return a - b;
-             });
-
-        let labels =
-            sortedLabels &&
-            sortedLabels.map(month => {
-                return monthRefs[month];
-            });
-
-        let expenses =
-            this.props.months &&
-            this.props.months.map(month => {
-                return month.total.$numberDecimal;
-            });
 
    
         //conditional for choosing the expenses view or the add expenses view
@@ -77,12 +39,11 @@ class Dashboard extends React.Component {
             <AddExpense handleContent={this.handleContent} />
         );
 
-        console.log("labels", labels)
-        console.log("labels", expenses)
+        
         return (
             <main className="dashboard">
                 <Dashbar />
-                <ChartContainer monthLabels={labels} monthExpenses={expenses}/>
+                <ChartContainer/>
                 <section className="dashboard__main-content">
                     <div className="dashboard__main-content--left">
                         <OverviewContainer />

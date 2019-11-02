@@ -16,9 +16,8 @@ import { BrowserRouter, Route } from "react-router-dom";
 
 class App extends Component {
     componentDidMount() {
-        console.log("called app lifecycles")
+        
         if (localStorage.getItem("localtoken") && localStorage.getItem("authedUser")) {
-            console.log("called inner refresh")
             let token = localStorage.getItem("localtoken");
             this.props.dispatch(verifyToken(token));
         }

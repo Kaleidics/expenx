@@ -10,7 +10,6 @@ class OverviewContainer extends React.Component {
     }
 
     render() {
-        console.log("months", this.props.months);
 
         const monthRefs = {
             1: "January",
@@ -31,9 +30,13 @@ class OverviewContainer extends React.Component {
             return a._id - b._id
         });
 
-        let monthAmounts = sortMonths ? sortMonths.map(month => {
+        let monthAmounts = sortMonths ? sortMonths.map((month, index) => {
             return (
-                <li className="overview-container__list-item" key={monthRefs[month._id]}>
+                <li
+                    className="overview-container__list-item"
+                    key={monthRefs[month._id]}
+                    style={{ animationDelay: `${index/15}s` }}
+                >
                     <span>{monthRefs[month._id]}</span>
                     <span>${FormatNum(month.total.$numberDecimal)}</span>
                 </li>

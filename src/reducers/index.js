@@ -75,7 +75,6 @@ export const Reducer = (state = initialState, action) => {
     }
 
     if (action.type === CREATE_EXPENSE_SUCCESS) {
-        console.log("reducercreate")
         return Object.assign({}, state, {
             expenses: [action.expense, ...state.expenses],
             universalMessage: action.success,
@@ -84,7 +83,6 @@ export const Reducer = (state = initialState, action) => {
     }
 
     if (action.type === SET_UNI_MSG) {
-        console.log("CLEARED", action.clear)
         return Object.assign({}, state, {
             universalMessage: action.msg,
             universalMessageColor: action.color

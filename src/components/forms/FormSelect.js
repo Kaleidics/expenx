@@ -3,7 +3,6 @@ import React from "react";
 export default function FormSelect(props) {
     //create options based on props.options array
     const options = props.options.map((option, index) => {
-        console.log(option)
         return (
             <option value={option} key={index}>
                 {option}

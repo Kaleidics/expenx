@@ -17,7 +17,8 @@ class ExpenseContainer extends React.Component {
     render() {
         
         //create array of expense filtered by their status
-        let filteredListItems = this.props.expenses ? this.props.expenses.filter(expense => expense.status == this.state.displayStatus ) : null;
+        let statusFilter = this.state.displayStatus === "All" ? "" : this.state.displayStatus;
+        let filteredListItems = this.props.expenses ? this.props.expenses.filter(expense => expense.status.includes(statusFilter) ) : null;
     
         //create array of expense sorted by creation date
         let sortedListItems = filteredListItems ? filteredListItems.sort((a, b) => {

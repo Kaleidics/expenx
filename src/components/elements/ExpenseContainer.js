@@ -36,10 +36,10 @@ class ExpenseContainer extends React.Component {
             <div className="expense-container">
                 <div className="expense-container__options">
                     <FormSelect
-                        options={["Active", "Archived", "All"]}
+                        options={["Active", "Archived", "Paid", "All"]}
                         onChange={e => this.setState({ displayStatus: e.target.value })}
                     />
-                    <button className="btn btn--alt" onClick={this.props.handleContent}>
+                    <button className="btn btn--solid" onClick={this.props.handleContent}>
                         Add Expense
                     </button>
                 </div>
@@ -53,9 +53,9 @@ class ExpenseContainer extends React.Component {
                     <ul className="expense-container__list">{ListItems}</ul>
                 </div>
                 <div className="expense-container__navigation">
-                    <button className="btn btn--solid">Previous</button>
+                    <button className="btn btn--alt">Previous</button>
                     <FormSelect options={[10, 25, 50]} onChange={e => this.setState({ displayRows: e.target.value })} />
-                    <button className="btn btn--solid">Next</button>
+                    <button className="btn btn--alt">Next</button>
                 </div>
             </div>
         );

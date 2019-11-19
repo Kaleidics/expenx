@@ -22,23 +22,31 @@ class ExpenseContainer extends React.Component {
         
         //create array of expense filtered by their status
         let statusFilter = this.state.displayStatus === "All" ? "" : this.state.displayStatus;
-        let filteredListItems = this.props.expenses ? this.props.expenses.filter(expense => expense.status.includes(statusFilter) ) : null;
+        let filteredListItems = this.props.expenses && this.props.expenses.filter(expense => expense.status.includes(statusFilter));
     
         //create array of expense sorted by creation date
-        let sortedListItems = filteredListItems ? filteredListItems.sort((a, b) => {
-              return new Date(b.createdAt) - new Date(a.createdAt);
-        }) : null ;
+        let sortedListItems = filteredListItems && filteredListItems.sort((a, b) => {
+            return new Date(b.createdAt) - new Date(a.createdAt);
+        });
 
         //Control render of pagination items before creating HTML elements
-        let paginatedListItems = sortedListItems && sortedListItems.slice(this.state.range.start, this.state.range.end);
+        let paginatedListItems = sortedListItems && sortedListItems.slice(this.state.range.start, this.state.range.end + this.state.displayRows - 10);
+
+        //limit the display number of expenses
+        let rowLimitedItems = paginatedListItems && paginatedListItems.slice(0, this.state.displayRows);
 
         //create the list items from the sorted listed items
-        let ListItems = paginatedListItems ? paginatedListItems.slice(0, this.state.displayRows).map((expense, index) => {
+        let ListItems = rowLimitedItems && rowLimitedItems.map((expense, index) => {
             return (
                 <ListItem {...expense} index={index} key={expense._id} style={{ animationDelay: `${(index / 15)}s` }} />
             );
-        }) : null ;
+        });
 
+        if (paginatedListItems) {
+            console.log(paginatedListItems.length)
+        }
+
+        console.log(this.state.range)
         return (
             <div className="expense-container">
                 <div className="expense-container__options">
@@ -65,10 +73,10 @@ class ExpenseContainer extends React.Component {
                         disabled={this.state.range.start != 0 ? false : true}>
                         Previous
                     </button>
-                    <FormSelect options={[10, 25, 50]} onChange={e => this.setState({ displayRows: e.target.value })} />
+                    <FormSelect options={[10, 25, 50]} onChange={e => this.setState({ displayRows: parseInt(e.target.value) })} />
                     <button className="btn btn--alt" 
                         onClick={() => this.setState({ range: { start: this.state.range.start + this.state.displayRows, end: this.state.range.end + this.state.displayRows } })} 
-                        disabled={this.props.expenses && this.props.expenses.length > 10 && this.props.expenses.length > this.state.range.end ? false : true}>
+                        disabled={paginatedListItems && paginatedListItems.length >= 10 && paginatedListItems.length >= this.state.range.end ? false : true}>
                         Next
                     </button>
                 </div>

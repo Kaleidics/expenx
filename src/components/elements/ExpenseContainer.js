@@ -10,7 +10,11 @@ class ExpenseContainer extends React.Component {
 
         this.state = {
             displayRows: 10,
-            displayStatus: "Active"
+            displayStatus: "Active",
+            range: {
+                start: 0,
+                end: 10
+            }
         }
     }
 
@@ -18,7 +22,7 @@ class ExpenseContainer extends React.Component {
         
         //create array of expense filtered by their status
         let statusFilter = this.state.displayStatus === "All" ? "" : this.state.displayStatus;
-        let filteredListItems = this.props.expenses ? this.props.expenses.filter(expense => expense.status.includes(statusFilter) ) : null;
+        let filteredListItems = this.props.expenses ? this.props.expenses.slice(this.state.range.start, this.state.range.end).filter(expense => expense.status.includes(statusFilter) ) : null;
     
         //create array of expense sorted by creation date
         let sortedListItems = filteredListItems ? filteredListItems.sort((a, b) => {
@@ -53,9 +57,17 @@ class ExpenseContainer extends React.Component {
                     <ul className="expense-container__list">{ListItems}</ul>
                 </div>
                 <div className="expense-container__navigation">
-                    <button className="btn btn--alt">Previous</button>
+                    <button className="btn btn--alt" 
+                        onClick={() => this.setState({ range: { start: this.state.range.start - this.state.displayRows, end: this.state.range.end - this.state.displayRows } })} 
+                        disabled={this.state.range.start != 0 ? false : true}>
+                        Previous
+                    </button>
                     <FormSelect options={[10, 25, 50]} onChange={e => this.setState({ displayRows: e.target.value })} />
-                    <button className="btn btn--alt">Next</button>
+                    <button className="btn btn--alt" 
+                        onClick={() => this.setState({ range: { start: this.state.range.start + this.state.displayRows, end: this.state.range.end + this.state.displayRows } })} 
+                        disabled={this.props.expenses && this.props.expenses.length > 10 && this.props.expenses.length > this.state.range.end ? false : true}>
+                        Next
+                    </button>
                 </div>
             </div>
         );
